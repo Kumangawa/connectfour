@@ -26,33 +26,71 @@ public class Match implements Serializable ,ReadMatch{
             this.moves=new ArrayList<>();
         }
     }
-    public int isFinished(){
-        int[][] grid=new int[3][3];
-        for (Move m:this.getMoves()) {
-            grid[m.x][m.y]=m.player;
-        }
-        // Check rows
-        for (int row = 0; row < 3; row++) {
-            if (grid[row][0]!=0 && grid[row][0] == grid[row][1] && grid[row][1] == grid[row][2]) {
-                return grid[row][0];
-            }
-        }
-        // Check columns
-        for (int col = 0; col < 3; col++) {
-            if (grid[0][col]!=0 && grid[0][col] == grid[1][col] && grid[1][col] == grid[2][col]) {
-                return grid[0][col];
-            }
-        }
-        // Check diagonals
-        if ((grid[0][0]!=0 && grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2]) ||
-                (grid[0][2]!=0 && grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0])) {
-            return grid[1][1];
+    public int isFinished() {
+        System.out.println("Sono nel finished");
+        int[][] grid = new int[6][7]; // Matrice 6x7 per il gioco di Forza 4
+
+        // Popolare la matrice con le mosse effettuate
+        for (Move m : this.getMoves()) {
+            grid[m.x][m.y] = m.player;
         }
 
-        //there are free cell
-        for (int[] row : grid)
-            for (int element : row) if(element==0) return 0;
-        //its a draw
+        // Controllare le righe
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 4; col++) {
+                int player = grid[row][col];
+                if (player != 0 && player == grid[row][col+1] && player == grid[row][col+2] && player == grid[row][col+3]) {
+                    System.out.println("vincita riga");
+                    return player; // C'è un vincitore
+                }
+            }
+        }
+
+        // Controllare le colonne
+        for (int col = 0; col < 7; col++) {
+            for (int row = 0; row < 3; row++) {
+                int player = grid[row][col];
+                if (player != 0 && player == grid[row+1][col] && player == grid[row+2][col] && player == grid[row+3][col]) {
+                    System.out.println("vincita colonna");
+                    return player; // C'è un vincitore
+                }
+            }
+        }
+
+        // Controllare le diagonali principali (da sinistra a destra)
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 4; col++) {
+                int player = grid[row][col];
+                if (player != 0 && player == grid[row+1][col+1] && player == grid[row+2][col+2] && player == grid[row+3][col+3]) {
+                    System.out.println("vincita diagonale da sinistra a destra");
+                    return player; // C'è un vincitore
+                }
+            }
+        }
+
+        // Controllare le diagonali secondarie (da destra a sinistra)
+        for (int row = 0; row < 3; row++) {
+            for (int col = 3; col < 7; col++) {
+                int player = grid[row][col];
+                if (player != 0 && player == grid[row+1][col-1] && player == grid[row+2][col-2] && player == grid[row+3][col-3]) {
+                    System.out.println("vincita diagonale da destra a sinistra");
+                    return player; // C'è un vincitore
+                }
+            }
+        }
+
+        // Se non ci sono mosse disponibili, è un pareggio
+        for (int[] row : grid) {
+            for (int element : row) {
+                if (element == 0) {
+                    System.out.println("non ci sono mosse disponibili");
+                    return 0; // Ci sono ancora mosse disponibili
+                }
+            }
+        }
+
+        // È un pareggio
+        System.out.println("pareggio");
         return -1;
     }
 

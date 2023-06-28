@@ -22,7 +22,7 @@ public class PersistenceModel {
     }
 
     //static
-    private synchronized static void createFolderTicTacToeANDGameSaved(){
+    private synchronized static void createFolderConnectFourANDGameSaved(){
         try {
             Files.createDirectories(Path.of(pathGameSaved));
             // Set the "hidden" attribute
@@ -45,7 +45,7 @@ public class PersistenceModel {
         this.savedPath=null;
     }
     public <T extends Serializable> void save(T t){
-        createFolderTicTacToeANDGameSaved();
+        createFolderConnectFourANDGameSaved();
         ObjectOutputStream out=null;
         FileOutputStream fileOut=null;
         try {
@@ -69,7 +69,7 @@ public class PersistenceModel {
         }
     }
     public <T extends Serializable> void saveAs(T t, String absolutePath){
-        createFolderTicTacToeANDGameSaved();
+        createFolderConnectFourANDGameSaved();
         absolutePath=this.checkSerializeName(absolutePath);
         ObjectOutputStream out=null;
         FileOutputStream fileOut=null;

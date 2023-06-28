@@ -9,18 +9,18 @@ public class Preference implements Serializable, ReadAndWritePreference {
     //fields
     private Boolean pathChanged;
     private String preferedPath;
-    private String simbolPlayer;       // Utilizzato durante il game
-    private String simbolAI;           // Utilizzato durante il game
-    private String colorPlayer;         // Utilizzato durante il game
-    private String colorAI;             // Utilizzato durante il game
+    private String simbolPlayerFirst;       // Utilizzato durante il game
+    private String simbolPlayerSecond;           // Utilizzato durante il game
+    private String colorPlayerFirst;         // Utilizzato durante il game
+    private String colorPlayerSecond;             // Utilizzato durante il game
     private String language;             // Da salvare nel file
     public Preference() {
         this.pathChanged=false;
         this.preferedPath=defaultPath;
-        this.simbolPlayer = "X";
-        this.simbolAI = "O";
-        this.colorPlayer = "black";
-        this.colorAI = "red";
+        this.simbolPlayerFirst = "X";
+        this.simbolPlayerSecond = "O";
+        this.colorPlayerFirst = "black";
+        this.colorPlayerSecond = "red";
 
         String language= System.getProperty("user.language");
         if(language.equals("en")){
@@ -36,10 +36,10 @@ public class Preference implements Serializable, ReadAndWritePreference {
     }
     public Preference(Preference preference){
         this.pathChanged=preference.pathChanged;
-        this.simbolPlayer = preference.simbolPlayer;
-        this.simbolAI = preference.simbolAI;
-        this.colorPlayer = preference.colorPlayer;
-        this.colorAI = preference.colorAI;
+        this.simbolPlayerFirst = preference.simbolPlayerFirst;
+        this.simbolPlayerSecond = preference.simbolPlayerSecond;
+        this.colorPlayerFirst = preference.colorPlayerFirst;
+        this.colorPlayerSecond = preference.colorPlayerSecond;
         this.language=preference.language;
         this.preferedPath=preference.preferedPath;
     }
@@ -52,20 +52,20 @@ public class Preference implements Serializable, ReadAndWritePreference {
         return preferedPath;
     }
 
-    public String getSimbolPlayer() {
-        return simbolPlayer;
+    public String getSimbolPlayerFirst() {
+        return simbolPlayerFirst;
     }
 
-    public String getSimbolAI() {
-        return simbolAI;
+    public String getSimbolPlayerSecond() {
+        return simbolPlayerSecond;
     }
 
-    public String getColorPlayer() {
-        return colorPlayer;
+    public String getColorPlayerFirst() {
+        return colorPlayerFirst;
     }
 
-    public String getColorAI() {
-        return colorAI;
+    public String getColorPlayerSecond() {
+        return colorPlayerSecond;
     }
 
     public String getLanguage() {
@@ -80,20 +80,20 @@ public class Preference implements Serializable, ReadAndWritePreference {
         this.preferedPath = preferedPath;
     }
 
-    public void setSimbolPlayer(String simbolPlayer) {
-        this.simbolPlayer = simbolPlayer;
+    public void setSimbolPlayerFirst(String simbolPlayer) {
+        this.simbolPlayerFirst = simbolPlayer;
     }
 
-    public void setSimbolAI(String simbolAI) {
-        this.simbolAI = simbolAI;
+    public void setSimbolPlayerSecond(String simbolAI) {
+        this.simbolPlayerSecond = simbolAI;
     }
 
-    public void setColorPlayer(String colorPlayer) {
-        this.colorPlayer = colorPlayer;
+    public void setColorPlayerFirst(String colorPlayer) {
+        this.colorPlayerFirst = colorPlayer;
     }
 
-    public void setColorAI(String colorAI) {
-        this.colorAI = colorAI;
+    public void setColorPlayerSecond(String colorAI) {
+        this.colorPlayerSecond = colorAI;
     }
 
     public void setLanguage(String language) {

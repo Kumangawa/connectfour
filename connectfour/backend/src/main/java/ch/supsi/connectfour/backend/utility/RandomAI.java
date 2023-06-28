@@ -8,14 +8,14 @@ public class RandomAI implements AI {
         Random random=new Random();
         int randomX;
         int randomY;
-        int[][] grid=new int[3][3];
+        int[][] grid=new int[6][7];
         for (Move m:match.getMoves()) {
             grid[m.x][m.y]=m.player;
         }
-        do{
-            randomX=random.nextInt(3);
-            randomY=random.nextInt(3);
-        } while(grid[randomX][randomY]!=0);
+        do {
+            randomX = random.nextInt(6);
+            randomY = random.nextInt(7);
+        } while (grid[randomX][randomY] != 0);
 
         return new Move(randomX ,randomY, 2);
     }

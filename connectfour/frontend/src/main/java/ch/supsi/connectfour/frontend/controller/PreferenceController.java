@@ -1,12 +1,8 @@
 package ch.supsi.connectfour.frontend.controller;
 
-import ch.supsi.connectfour.backend.controller.LocalizationController;
-import ch.supsi.connectfour.backend.controller.handler.LocalizationControllerHandler;
 import ch.supsi.connectfour.backend.utility.ReadPreference;
 import ch.supsi.connectfour.frontend.model.PreferenceModel;
-import ch.supsi.connectfour.backend.utility.Preference;
 import ch.supsi.connectfour.frontend.view.PreferenceView;
-import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -41,28 +37,28 @@ public class PreferenceController {
         }
     }
 
-    public void editSymbolAi() {
-        String newSymbol=preferenceView.showPopUpEditSymbolAI(
-                preferenceModel.getReadPreference().getSimbolAI(),
-                preferenceModel.getReadPreferenceToSave().getSimbolPlayer());
-        preferenceModel.setSimbolAI(newSymbol);
+    public void editSymbolPlayerSecond() {
+        String newSymbol=preferenceView.showPopUpEditSymbolPlayerSecond(
+                preferenceModel.getReadPreference().getSimbolPlayerSecond(),
+                preferenceModel.getReadPreferenceToSave().getSimbolPlayerFirst());
+        preferenceModel.setSimbolPlayerSecond(newSymbol);
     }
 
-    public void editSymbolPlayer() {
-        String newSymbol=preferenceView.showPopUpEditSymbolPlayer(
-                preferenceModel.getReadPreference().getSimbolPlayer(),
-                preferenceModel.getReadPreferenceToSave().getSimbolAI());
-        preferenceModel.setSimbolPlayer(newSymbol);
+    public void editSymbolPlayerFirst() {
+        String newSymbol=preferenceView.showPopUpEditSymbolPlayerFirst(
+                preferenceModel.getReadPreference().getSimbolPlayerFirst(),
+                preferenceModel.getReadPreferenceToSave().getSimbolPlayerSecond());
+        preferenceModel.setSimbolPlayerFirst(newSymbol);
     }
 
-    public void editColorAi() {
-        String color = preferenceView.showPopUpEditColor(preferenceModel.getReadPreferenceToSave().getColorAI());
-        preferenceModel.setColorAI(color);
+    public void editColorPlayerSecond() {
+        String color = preferenceView.showPopUpEditColor(preferenceModel.getReadPreferenceToSave().getColorPlayerSecond());
+        preferenceModel.setColorPlayerSecond(color);
     }
 
-    public void editColorPlayer() {
-        String color = preferenceView.showPopUpEditColor(preferenceModel.getReadPreferenceToSave().getColorPlayer());
-        preferenceModel.setColorPlayer(color);
+    public void editColorPlayerFirst() {
+        String color = preferenceView.showPopUpEditColor(preferenceModel.getReadPreferenceToSave().getColorPlayerFirst());
+        preferenceModel.setColorPlayerFirst(color);
     }
 
     public ReadPreference getReadPreference() {

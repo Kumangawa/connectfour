@@ -4,10 +4,10 @@ public interface ReadPreference {
 
     public Boolean getPathChanged();
     public String getPreferedPath();
-    public String getSimbolPlayer();
-    public String getSimbolAI();
-    public String getColorPlayer();
-    public String getColorAI();
+    public String getSimbolPlayerFirst();
+    public String getSimbolPlayerSecond();
+    public String getColorPlayerFirst();
+    public String getColorPlayerSecond();
     public String getLanguage();
 
 }

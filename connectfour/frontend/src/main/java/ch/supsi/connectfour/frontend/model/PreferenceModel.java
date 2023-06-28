@@ -84,21 +84,21 @@ public class PreferenceModel {
         this.preferenceToSave.setPreferedPath(preferedPath);
         this.savePreference();
     }
-    public void setSimbolPlayer(String simbolPlayer) {
-        this.preferenceToSave.setSimbolPlayer(simbolPlayer);
+    public void setSimbolPlayerFirst(String simbolPlayer) {
+        this.preferenceToSave.setSimbolPlayerFirst(simbolPlayer);
         this.savePreference();
     }
-    public void setSimbolAI(String simbolAI) {
-        this.preferenceToSave.setSimbolAI(simbolAI);
+    public void setSimbolPlayerSecond(String simbolPlayer) {
+        this.preferenceToSave.setSimbolPlayerSecond(simbolPlayer);
         this.savePreference();
     }
 
-    public void setColorPlayer(String colorPlayer) {
-        this.preferenceToSave.setColorPlayer(colorPlayer);
+    public void setColorPlayerFirst(String colorPlayer) {
+        this.preferenceToSave.setColorPlayerFirst(colorPlayer);
         this.savePreference();
     }
-    public void setColorAI(String colorAI) {
-        this.preferenceToSave.setColorAI(colorAI);
+    public void setColorPlayerSecond(String colorPlayer) {
+        this.preferenceToSave.setColorPlayerSecond(colorPlayer);
         this.savePreference();
     }
     public void setLanguage(String language) {

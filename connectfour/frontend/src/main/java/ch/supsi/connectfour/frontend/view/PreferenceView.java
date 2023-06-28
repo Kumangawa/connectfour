@@ -1,6 +1,5 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.backend.controller.handler.LocalizationControllerHandler;
 import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -41,7 +40,7 @@ public class PreferenceView {
         return file;
     }
 
-    public String showPopUpEditSymbolAI( String symbolAI, String symbolFuturePlayer) {
+    public String showPopUpEditSymbolPlayerSecond(String symbolPlayerSecond, String symbolFuturePlayerFirst) {
         // Carica la lista di simboli da un file delle risorse
         List<String> symbols = new ArrayList<>();
         try {
@@ -55,7 +54,7 @@ public class PreferenceView {
             e.printStackTrace();
         }
 
-        ChoiceDialog<String> dialog = new ChoiceDialog<>(symbolAI, symbols);
+        ChoiceDialog<String> dialog = new ChoiceDialog<>(symbolPlayerSecond, symbols);
         dialog.setTitle(this.localizationModelHandler.localize("message.editsymbol.title"));
         dialog.setHeaderText(null);
         dialog.setContentText(this.localizationModelHandler.localize("message.editsymbol.ai.text"));
@@ -63,14 +62,14 @@ public class PreferenceView {
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             String selectedSymbol = result.get();
-            if (!selectedSymbol.equals(symbolFuturePlayer)) {
+            if (!selectedSymbol.equals(symbolFuturePlayerFirst)) {
                 return selectedSymbol;
             }
         }
-        return symbolAI;
+        return symbolPlayerSecond;
     }
 
-    public String showPopUpEditSymbolPlayer(String symbolPlayer, String symbolFutureAI) {
+    public String showPopUpEditSymbolPlayerFirst(String symbolPlayerFirst, String symbolFuturePlayerSecond) {
         // Carica la lista di simboli da un file delle risorse
         List<String> symbols = new ArrayList<>();
         try {
@@ -84,7 +83,7 @@ public class PreferenceView {
             e.printStackTrace();
         }
 
-        ChoiceDialog<String> dialog = new ChoiceDialog<>(symbolPlayer, symbols);
+        ChoiceDialog<String> dialog = new ChoiceDialog<>(symbolPlayerFirst, symbols);
         dialog.setTitle(this.localizationModelHandler.localize("message.editsymbol.title"));
         dialog.setHeaderText(null);
         dialog.setContentText(this.localizationModelHandler.localize("message.editsymbol.player.text"));
@@ -92,12 +91,12 @@ public class PreferenceView {
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             String selectedSymbol = result.get();
-            if (!selectedSymbol.equals(symbolFutureAI)) {
+            if (!selectedSymbol.equals(symbolFuturePlayerSecond)) {
                 return selectedSymbol;
             }
         }
 
-        return symbolPlayer;
+        return symbolPlayerFirst;
     }
 
     public String showPopUpEditColor( String color) {

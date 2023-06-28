@@ -5,10 +5,8 @@ import ch.supsi.connectfour.backend.utility.*;
 
 public class GameModel {
     private Match match;
-    private AI ai;
     //constructor
     public GameModel(){
-        this.ai =new RandomAI();
         this.match=new Match();
     }
     //static
@@ -22,20 +20,12 @@ public class GameModel {
     public int isFinished(){
         return this.match.isFinished();
     }
-    public Move playerMoved(int x, int y){
-        match.addMove(new Move(x, y, 1));
-        int t=-1;
-        Move iaMove;
-        t=match.isFinished();
-
-        //match finished
-        if (t!=0){
-            return null;
-        }else {
-            iaMove= ai.iaMove(match);
-            match.addMove(iaMove);
+    public void playerMoved(int x, int y, boolean firstPlayerTurn){
+        if (firstPlayerTurn){
+            match.addMove(new Move(x, y, 1));
+        } else {
+            match.addMove(new Move(x, y, 2));
         }
-        return iaMove;
     }
 
     public ReadMatch getReadMatch() { return match; }

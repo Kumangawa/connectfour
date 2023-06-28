@@ -11,10 +11,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import javafx.scene.control.ColorPicker;
 
 
 import java.util.Objects;
@@ -105,20 +102,20 @@ public class MenuBar {
 
     @FXML
     public  void editColorsPlayer(ActionEvent e) {
-        preferenceController.editColorPlayer();
+        preferenceController.editColorPlayerFirst();
     }
     @FXML
     public void editColorsAi(ActionEvent e) {
-        preferenceController.editColorAi();
+        preferenceController.editColorPlayerSecond();
     }
 
     @FXML
     public void editsymbolPlayer(ActionEvent e) {
-        preferenceController.editSymbolPlayer();
+        preferenceController.editSymbolPlayerFirst();
     }
 
     @FXML
     public void editsymbolAi(ActionEvent e) {
-        preferenceController.editSymbolAi();
+        preferenceController.editSymbolPlayerSecond();
     }
 }
