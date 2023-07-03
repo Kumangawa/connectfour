@@ -158,7 +158,7 @@ public class AppFx extends Application {
         borderPane.setBottom(infoBar);
 
         // create a new scene with the border pane
-        Scene scene = new Scene(borderPane, 410, 429);  // 600, 629     340, 369
+        Scene scene = new Scene(borderPane, 610, 629);  // 600, 629     340, 369
 
         // put the scene onto the stage
         stage.setTitle("Connect Four");

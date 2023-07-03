@@ -57,7 +57,7 @@ public class PreferenceView {
         ChoiceDialog<String> dialog = new ChoiceDialog<>(symbolPlayerSecond, symbols);
         dialog.setTitle(this.localizationModelHandler.localize("message.editsymbol.title"));
         dialog.setHeaderText(null);
-        dialog.setContentText(this.localizationModelHandler.localize("message.editsymbol.ai.text"));
+        dialog.setContentText(this.localizationModelHandler.localize("message.editsymbol.player.two.text"));
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
@@ -86,7 +86,7 @@ public class PreferenceView {
         ChoiceDialog<String> dialog = new ChoiceDialog<>(symbolPlayerFirst, symbols);
         dialog.setTitle(this.localizationModelHandler.localize("message.editsymbol.title"));
         dialog.setHeaderText(null);
-        dialog.setContentText(this.localizationModelHandler.localize("message.editsymbol.player.text"));
+        dialog.setContentText(this.localizationModelHandler.localize("message.editsymbol.player.one.text"));
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {

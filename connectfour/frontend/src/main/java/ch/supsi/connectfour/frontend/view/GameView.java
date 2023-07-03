@@ -1,6 +1,5 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.backend.controller.handler.LocalizationControllerHandler;
 import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -35,12 +34,12 @@ public class GameView {
             alert.setHeaderText(this.localizationModelHandler.localize("message.endgame.draw.text"));
         } else if (ending == 1) {
             // Win Player
-            alert.setTitle(this.localizationModelHandler.localize("message.endgame.win.player.title"));
-            alert.setHeaderText(this.localizationModelHandler.localize("message.endgame.win.player.text"));
+            alert.setTitle(this.localizationModelHandler.localize("message.endgame.win.player.one.title"));
+            alert.setHeaderText(this.localizationModelHandler.localize("message.endgame.win.player.one.text"));
         } else {
             // Win AI
-            alert.setTitle(this.localizationModelHandler.localize("message.endgame.win.ai.title"));
-            alert.setHeaderText(this.localizationModelHandler.localize("message.endgame.win.ai.text"));
+            alert.setTitle(this.localizationModelHandler.localize("message.endgame.win.player.two.title"));
+            alert.setHeaderText(this.localizationModelHandler.localize("message.endgame.win.player.two.text"));
         }
 
 
