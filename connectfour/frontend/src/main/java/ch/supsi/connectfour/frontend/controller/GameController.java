@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameController {
     private boolean initialized=false;
@@ -88,99 +89,99 @@ public class GameController {
         System.out.println("L indice e' " + columnIndex);
 
         if(columnIndex == 0) {
-            if (!b50.isDisabled()) {
+            if (Objects.equals(b50.getText(), "")) {
                 return b50;
-            } else if (!b40.isDisabled()) {
+            } else if (Objects.equals(b40.getText(), "")) {
                 return b40;
-            } else if (!b30.isDisabled()) {
+            } else if (Objects.equals(b30.getText(), "")) {
                 return b30;
-            } else if (!b20.isDisabled()) {
+            } else if (Objects.equals(b20.getText(), "")) {
                 return b20;
-            } else if (!b10.isDisabled()) {
+            } else if (Objects.equals(b10.getText(), "")) {
                 return b10;
             } else {
                 return b00;
             }
         } else if (columnIndex == 1) {
-            if (!b51.isDisabled()) {
+            if (Objects.equals(b51.getText(), "")) {
                 return b51;
-            } else if (!b41.isDisabled()) {
+            } else if (Objects.equals(b41.getText(), "")) {
                 return b41;
-            } else if (!b31.isDisabled()) {
+            } else if (Objects.equals(b31.getText(), "")) {
                 return b31;
-            } else if (!b21.isDisabled()) {
+            } else if (Objects.equals(b21.getText(), "")) {
                 return b21;
-            } else if (!b11.isDisabled()) {
+            } else if (Objects.equals(b11.getText(), "")) {
                 return b11;
             } else {
                 return b01;
             }
         } else if (columnIndex == 2) {
-            if (!b52.isDisabled()) {
+            if (Objects.equals(b52.getText(), "")) {
                 return b52;
-            } else if (!b42.isDisabled()) {
+            } else if (Objects.equals(b42.getText(), "")) {
                 return b42;
-            } else if (!b32.isDisabled()) {
+            } else if (Objects.equals(b32.getText(), "")) {
                 return b32;
-            } else if (!b22.isDisabled()) {
+            } else if (Objects.equals(b22.getText(), "")) {
                 return b22;
-            } else if (!b12.isDisabled()) {
+            } else if (Objects.equals(b12.getText(), "")) {
                 return b12;
             } else {
                 return b02;
             }
         } else if (columnIndex == 3) {
-            if (!b53.isDisabled()) {
+            if (Objects.equals(b53.getText(), "")) {
                 return b53;
-            } else if (!b43.isDisabled()) {
+            } else if (Objects.equals(b43.getText(), "")) {
                 return b43;
-            } else if (!b33.isDisabled()) {
+            } else if (Objects.equals(b33.getText(), "")) {
                 return b33;
-            } else if (!b23.isDisabled()) {
+            } else if (Objects.equals(b23.getText(), "")) {
                 return b23;
-            } else if (!b13.isDisabled()) {
+            } else if (Objects.equals(b13.getText(), "")) {
                 return b13;
             } else {
                 return b03;
             }
         } else if (columnIndex == 4) {
-            if (!b54.isDisabled()) {
+            if (Objects.equals(b54.getText(), "")) {
                 return b54;
-            } else if (!b44.isDisabled()) {
+            } else if (Objects.equals(b44.getText(), "")) {
                 return b44;
-            } else if (!b34.isDisabled()) {
+            } else if (Objects.equals(b34.getText(), "")) {
                 return b34;
-            } else if (!b24.isDisabled()) {
+            } else if (Objects.equals(b24.getText(), "")) {
                 return b24;
-            } else if (!b14.isDisabled()) {
+            } else if (Objects.equals(b14.getText(), "")) {
                 return b14;
             } else {
                 return b04;
             }
         } else if (columnIndex == 5) {
-            if (!b55.isDisabled()) {
+            if (Objects.equals(b55.getText(), "")) {
                 return b55;
-            } else if (!b45.isDisabled()) {
+            } else if (Objects.equals(b45.getText(), "")) {
                 return b45;
-            } else if (!b35.isDisabled()) {
+            } else if (Objects.equals(b35.getText(), "")) {
                 return b35;
-            } else if (!b25.isDisabled()) {
+            } else if (Objects.equals(b25.getText(), "")) {
                 return b25;
-            } else if (!b15.isDisabled()) {
+            } else if (Objects.equals(b15.getText(), "")) {
                 return b15;
             } else {
                 return b05;
             }
         } else {
-            if (!b56.isDisabled()) {
+            if (Objects.equals(b56.getText(), "")) {
                 return b56;
-            } else if (!b46.isDisabled()) {
+            } else if (Objects.equals(b46.getText(), "")) {
                 return b46;
-            } else if (!b36.isDisabled()) {
+            } else if (Objects.equals(b36.getText(), "")) {
                 return b36;
-            } else if (!b26.isDisabled()) {
+            } else if (Objects.equals(b26.getText(), "")) {
                 return b26;
-            } else if (!b16.isDisabled()) {
+            } else if (Objects.equals(b16.getText(), "")) {
                 return b16;
             } else {
                 return b06;
@@ -217,12 +218,6 @@ public class GameController {
 
         return colore;
     }
-
-    /**
-     * b00, b01, b02,
-     * b10, b11, b12,
-     * b20, b21, b22;
-     * */
     private int[] fromButtonToCoordinates(Button b){
         int[] r=new int[2];
         r[0]=Integer.parseInt(b.getId().substring(1,2));
@@ -265,9 +260,17 @@ public class GameController {
         };
 
         for (Button button : buttonsToDisable) {
-            button.setDisable(false);
             button.setText("");
         }
+    }
+
+    private void setDisable(){
+        b00.setDisable(true); b01.setDisable(true); b02.setDisable(true); b03.setDisable(true); b04.setDisable(true); b05.setDisable(true); b06.setDisable(true);
+        b10.setDisable(true); b11.setDisable(true); b12.setDisable(true); b13.setDisable(true); b14.setDisable(true); b15.setDisable(true); b16.setDisable(true);
+        b20.setDisable(true); b21.setDisable(true); b22.setDisable(true); b23.setDisable(true); b24.setDisable(true); b25.setDisable(true); b26.setDisable(true);
+        b30.setDisable(true); b31.setDisable(true); b32.setDisable(true); b33.setDisable(true); b34.setDisable(true); b35.setDisable(true); b36.setDisable(true);
+        b40.setDisable(true); b41.setDisable(true); b42.setDisable(true); b43.setDisable(true); b44.setDisable(true); b45.setDisable(true); b46.setDisable(true);
+        b50.setDisable(true); b51.setDisable(true); b52.setDisable(true); b53.setDisable(true); b54.setDisable(true); b55.setDisable(true); b56.setDisable(true);
     }
 
     //public
@@ -276,6 +279,7 @@ public class GameController {
         this.gameView=gameView;
         this.gameModel=gameModel;
         this.initialized=true;
+        setDisable();
     }
 
     public ReadMatch getReadMatch(){

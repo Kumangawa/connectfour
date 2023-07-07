@@ -27,7 +27,6 @@ public class Match implements Serializable ,ReadMatch{
         }
     }
     public int isFinished() {
-        System.out.println("Sono nel finished");
         int[][] grid = new int[6][7]; // Matrice 6x7 per il gioco di Forza 4
 
         // Popolare la matrice con le mosse effettuate
@@ -40,7 +39,6 @@ public class Match implements Serializable ,ReadMatch{
             for (int col = 0; col < 4; col++) {
                 int player = grid[row][col];
                 if (player != 0 && player == grid[row][col+1] && player == grid[row][col+2] && player == grid[row][col+3]) {
-                    System.out.println("vincita riga");
                     return player; // C'è un vincitore
                 }
             }
@@ -51,7 +49,6 @@ public class Match implements Serializable ,ReadMatch{
             for (int row = 0; row < 3; row++) {
                 int player = grid[row][col];
                 if (player != 0 && player == grid[row+1][col] && player == grid[row+2][col] && player == grid[row+3][col]) {
-                    System.out.println("vincita colonna");
                     return player; // C'è un vincitore
                 }
             }
@@ -62,7 +59,6 @@ public class Match implements Serializable ,ReadMatch{
             for (int col = 0; col < 4; col++) {
                 int player = grid[row][col];
                 if (player != 0 && player == grid[row+1][col+1] && player == grid[row+2][col+2] && player == grid[row+3][col+3]) {
-                    System.out.println("vincita diagonale da sinistra a destra");
                     return player; // C'è un vincitore
                 }
             }
@@ -73,7 +69,6 @@ public class Match implements Serializable ,ReadMatch{
             for (int col = 3; col < 7; col++) {
                 int player = grid[row][col];
                 if (player != 0 && player == grid[row+1][col-1] && player == grid[row+2][col-2] && player == grid[row+3][col-3]) {
-                    System.out.println("vincita diagonale da destra a sinistra");
                     return player; // C'è un vincitore
                 }
             }
@@ -83,14 +78,12 @@ public class Match implements Serializable ,ReadMatch{
         for (int[] row : grid) {
             for (int element : row) {
                 if (element == 0) {
-                    System.out.println("non ci sono mosse disponibili");
                     return 0; // Ci sono ancora mosse disponibili
                 }
             }
         }
 
         // È un pareggio
-        System.out.println("pareggio");
         return -1;
     }
 

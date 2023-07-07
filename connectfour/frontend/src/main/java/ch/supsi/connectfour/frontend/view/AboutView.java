@@ -31,7 +31,7 @@ public class AboutView {
         popupStage.initOwner(this.stage);
 
         // Create a label for the message
-        Label messageLabel = new Label("TicTacToe 1.0 \n authors: \n Alex Petralli\n Samuele Saporito");
+        Label messageLabel = new Label("ConnectFour 1.0 \n authors: \n Alex Petralli\n Samuele Saporito");
 
         Button closeButton = new Button(this.localizationModelHandler.localize("message.about.close"));
         closeButton.setOnAction(event -> popupStage.close());

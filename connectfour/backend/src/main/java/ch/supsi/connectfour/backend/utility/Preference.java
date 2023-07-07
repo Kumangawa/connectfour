@@ -18,7 +18,7 @@ public class Preference implements Serializable, ReadAndWritePreference {
         this.pathChanged=false;
         this.preferedPath=defaultPath;
         this.simbolPlayerFirst = "X";
-        this.simbolPlayerSecond = "O";
+        this.simbolPlayerSecond = "o";
         this.colorPlayerFirst = "black";
         this.colorPlayerSecond = "red";
 

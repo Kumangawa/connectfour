@@ -24,7 +24,6 @@ public class GameView {
         // Imposta il colore del testo su Grigio
         clickedButton.setTextFill(colore);
         clickedButton.setText(simbolo);
-        clickedButton.setDisable(true);
     }
     public boolean showPopUpEnd( int ending){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
