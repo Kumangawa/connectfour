@@ -99,7 +99,7 @@ public class PreferenceView {
         return symbolPlayerFirst;
     }
 
-    public String showPopUpEditColor( String color) {
+    public String showPopUpEditColor(String color) {
         // Creazione del ColorPicker
         ColorPicker colorPicker = new ColorPicker();
         colorPicker.setValue(Color.valueOf(color));

@@ -24,6 +24,7 @@ public class GameController {
     private ReadPreference readPreference;
     private GameModel gameModel;
     private GameView gameView;
+    private InfoBarController infoBar;
     // Grid Buttons
     public Button   b00, b01, b02, b03, b04, b05, b06,
                     b10, b11, b12, b13, b14, b15, b16,
@@ -44,7 +45,6 @@ public class GameController {
     };
 
     //constructor
-
     public GameController() {
     }
 
@@ -65,6 +65,7 @@ public class GameController {
             int[] coordinates= fromButtonToCoordinates(targetButton);
             gameModel.playerMoved(coordinates[0],coordinates[1], firstPlayerTurn);
             firstPlayerTurn = !firstPlayerTurn;
+
             switch (gameModel.isFinished()){
                 //draw
                 case -1:
@@ -82,12 +83,15 @@ public class GameController {
                     endGame(gameView.showPopUpEnd( 2));
                     break;
             }
+            if (firstPlayerTurn){
+                infoBar.changeTurnToPlayerOne();
+            } else {
+                infoBar.changeTurnToPlayerTwo();
+            }
         }
     }
 
     private Button getBottomButtonInColumn(int columnIndex) {
-        System.out.println("L indice e' " + columnIndex);
-
         if(columnIndex == 0) {
             if (Objects.equals(b50.getText(), "")) {
                 return b50;
@@ -274,11 +278,12 @@ public class GameController {
     }
 
     //public
-    public void initializeExplicit(ReadPreference readPreference, GameView gameView, GameModel gameModel) {
+    public void initializeExplicit(ReadPreference readPreference, GameView gameView, GameModel gameModel, InfoBarController infoBar) {
         this.readPreference = readPreference;
         this.gameView=gameView;
         this.gameModel=gameModel;
         this.initialized=true;
+        this.infoBar=infoBar;
         setDisable();
     }
 
@@ -289,17 +294,26 @@ public class GameController {
         this.gameModel.loadMatch(match);
         this.resetBoard();
         this.loadMoves(match.getMoves());
+        infoBar.loadMatch();
+
+        if (match.getMoves().size() % 2 == 0){
+            infoBar.changeTurnToPlayerOne();
+        } else {
+            infoBar.changeTurnToPlayerTwo();
+        }
     }
     public void newGame() {
         if(this.gameModel.isGameInProgress() && endGame){
             if(gameView.showPopUpNewGame()){
                 this.gameModel.reset();
                 this.resetBoard();
+                infoBar.changeTurnToPlayerOne();
             }
         } else {
             endGame = true;
             this.gameModel.reset();
             this.resetBoard();
+            infoBar.changeTurnToPlayerOne();
         }
 
     }

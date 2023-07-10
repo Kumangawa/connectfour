@@ -47,7 +47,8 @@ public class AppFx extends Application {
     private MenuBar menuBar;
 
     /**INFO BAR**/
-    private InfoBar infoBar;
+    private InfoBarController infoBarController;
+    private InfoBarView infoBarView;
 
 
     //backend
@@ -66,7 +67,6 @@ public class AppFx extends Application {
         localizationModelHandler = new LocalizationModel("i18n.translations", Locale.forLanguageTag(readPreference.getLanguage()));
         localizationControllerHandler = new LocalizationController(localizationModelHandler);
 
-
         preferenceView=new PreferenceView(localizationModelHandler, stage);
         preferenceController=new PreferenceController(preferenceModel,preferenceView);
 
@@ -81,10 +81,6 @@ public class AppFx extends Application {
 
         aboutView=new AboutView(stage, localizationModelHandler);
         aboutController=new AboutController(aboutView);
-
-
-        /**LocalizationModelHandler**/
-        // construction of localization controller
 
 
 
@@ -108,10 +104,26 @@ public class AppFx extends Application {
         FXMLLoader playingGridFxmlLoader = new FXMLLoader(gridFxmlUrl, localizationControllerHandler.getResourceBundle());
         Parent gridPane = playingGridFxmlLoader.load();
 
+        /**INFO BAR**/
+        // get the layout URL based on the fxml resource file
+        URL infoBarFxmlUrl = getClass().getResource("/ch/supsi/connectfour/frontend/infobar.fxml");
+        if (infoBarFxmlUrl == null) {
+            // resource file not found
+            return;
+        }
+
+        FXMLLoader infoBarLoader = new FXMLLoader(infoBarFxmlUrl, localizationControllerHandler.getResourceBundle());
+        Parent infoBar = infoBarLoader.load();
+        infoBarController = (InfoBarController) infoBarLoader.getController();
+
+        infoBarView=new InfoBarView(localizationModelHandler);
+        infoBarController.initializeExplicit(infoBarView);
+
+        preferenceController.initializeInfoBar(infoBarController);
 
         /**GAME_CONTROLLER**/
         gameController = playingGridFxmlLoader.getController();
-        gameController.initializeExplicit(readPreference,  gameView,  gameModel);
+        gameController.initializeExplicit(readPreference,  gameView,  gameModel, infoBarController);
 
         /**PERSISTENCE**/
 
@@ -132,22 +144,6 @@ public class AppFx extends Application {
         this.menuBar = menuBarLoader.getController();
         this.menuBar.initializeExplicit(localizationControllerHandler, stage, gameController,
                 persistenceController, preferenceController, aboutController);
-
-        /**INFO BAR**/
-        // get the layout URL based on the fxml resource file
-        URL infoBarFxmlUrl = getClass().getResource("/ch/supsi/connectfour/frontend/infobar.fxml");
-        if (infoBarFxmlUrl == null) {
-            // resource file not found
-            return;
-        }
-
-        FXMLLoader infoBarLoader = new FXMLLoader(infoBarFxmlUrl, localizationControllerHandler.getResourceBundle());
-        Parent infoBar = infoBarLoader.load();
-        this.infoBar = (InfoBar) infoBarLoader.getController();
-
-        // show welcome message
-        this.infoBar.showMessage(localizationControllerHandler.localize("user.message.welcome"));
-        this.infoBar.initializeExplicit();
 
 
 
