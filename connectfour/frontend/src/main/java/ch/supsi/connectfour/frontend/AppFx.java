@@ -7,6 +7,7 @@ import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
 import ch.supsi.connectfour.backend.utility.ReadMatch;
 import ch.supsi.connectfour.backend.utility.ReadPreference;
 import ch.supsi.connectfour.frontend.controller.*;
+import ch.supsi.connectfour.frontend.controller.observer.Observer;
 import ch.supsi.connectfour.frontend.model.GameModel;
 import ch.supsi.connectfour.frontend.model.PersistenceModel;
 import ch.supsi.connectfour.frontend.model.PreferenceModel;
@@ -49,6 +50,8 @@ public class AppFx extends Application {
     /**INFO BAR**/
     private InfoBarController infoBarController;
     private InfoBarView infoBarView;
+
+    private Observer observer;
 
 
     //backend
@@ -119,11 +122,13 @@ public class AppFx extends Application {
         infoBarView=new InfoBarView(localizationModelHandler);
         infoBarController.initializeExplicit(infoBarView);
 
-        preferenceController.initializeInfoBar(infoBarController);
+        observer= new Observer(infoBarController);
+
+        preferenceController.initializeInfoBar(observer);
 
         /**GAME_CONTROLLER**/
         gameController = playingGridFxmlLoader.getController();
-        gameController.initializeExplicit(readPreference,  gameView,  gameModel, infoBarController);
+        gameController.initializeExplicit(readPreference,  gameView,  gameModel, observer);
 
         /**PERSISTENCE**/
 
@@ -142,7 +147,7 @@ public class AppFx extends Application {
         FXMLLoader menuBarLoader = new FXMLLoader(menuBarFxmlUrl, localizationControllerHandler.getResourceBundle());
         Parent menuBar = menuBarLoader.load();
         this.menuBar = menuBarLoader.getController();
-        this.menuBar.initializeExplicit(localizationControllerHandler, stage, gameController,
+        this.menuBar.initializeExplicit(localizationControllerHandler, gameController,
                 persistenceController, preferenceController, aboutController);
 
 

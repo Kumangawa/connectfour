@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class PreferenceView {
+public class PreferenceView implements WritePreferenceView{
     private LocalizationModelHandler localizationModelHandler;
     private Stage stage;
 

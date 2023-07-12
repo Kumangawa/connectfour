@@ -1,6 +1,5 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.backend.controller.handler.LocalizationControllerHandler;
 import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -10,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class PersistenceView {
+public class PersistenceView implements WritePersistenceView{
     private Stage stage;
     private LocalizationModelHandler localizationModelHandler;
 

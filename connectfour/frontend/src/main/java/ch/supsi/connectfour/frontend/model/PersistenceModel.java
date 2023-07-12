@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.DosFileAttributeView;
 
-public class PersistenceModel {
+public class PersistenceModel implements ReadAndWritePersistenceModel{
     public static final String pathGameSaved=Paths.get(Preference.defaultPath) +File.separator +"GameSaved";
     private boolean saved=false;
     private String savedPath;

@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.DosFileAttributeView;
 
-public class PreferenceModel {
+public class PreferenceModel implements ReadAndWritePreferenceModel{
     private boolean initialized =false;
     private Preference preference;
     private Preference preferenceToSave;

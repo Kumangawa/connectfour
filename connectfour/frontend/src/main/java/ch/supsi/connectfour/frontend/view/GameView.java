@@ -7,7 +7,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class GameView {
+public class GameView implements WriteGameView{
     private LocalizationModelHandler localizationModelHandler;
 
     //constructor

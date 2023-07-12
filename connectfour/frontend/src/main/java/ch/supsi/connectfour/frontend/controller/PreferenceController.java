@@ -1,20 +1,21 @@
 package ch.supsi.connectfour.frontend.controller;
 
 import ch.supsi.connectfour.backend.utility.ReadPreference;
-import ch.supsi.connectfour.frontend.model.PreferenceModel;
-import ch.supsi.connectfour.frontend.view.PreferenceView;
+import ch.supsi.connectfour.frontend.controller.observer.WriteObserver;
+import ch.supsi.connectfour.frontend.model.ReadAndWritePreferenceModel;
+import ch.supsi.connectfour.frontend.view.WritePreferenceView;
 
 import java.io.File;
 import java.util.Objects;
 
-public class PreferenceController {
+public class PreferenceController implements WritePreferenceController{
     private boolean inizialized=false;
-    private PreferenceModel preferenceModel;
-    private PreferenceView preferenceView;
-    private InfoBarController infoBar;
+    private ReadAndWritePreferenceModel preferenceModel;
+    private WritePreferenceView preferenceView;
+    private WriteObserver observer;
 
     //constructor
-    public PreferenceController(PreferenceModel preferenceModel, PreferenceView preferenceView) {
+    public PreferenceController(ReadAndWritePreferenceModel preferenceModel, WritePreferenceView preferenceView) {
         this.preferenceModel = preferenceModel;
         this.preferenceView = preferenceView;
     }
@@ -27,22 +28,22 @@ public class PreferenceController {
     public void initializeExplicit(){
         this.inizialized=true;
     }
-    public void initializeInfoBar(InfoBarController infoBar){
-        this.infoBar=infoBar;
+    public void initializeInfoBar(WriteObserver observer){
+        this.observer=observer;
     }
 
     public void setLanguage(String language) {
-        infoBar.changeLanguage();
+        observer.changeLanguage();
         this.preferenceModel.setLanguage(language);
     }
 
     public void editPath(){
         File file=preferenceView.showDirChooser(preferenceModel.getReadPreference().getPreferedPath());
         if(file!=null){
-            infoBar.changePathSuccess();
+            observer.changePathSuccess();
             preferenceModel.changePreferedPath(file.getPath());
         } else {
-            infoBar.changePathFail();
+            observer.changePathFail();
         }
     }
 
@@ -51,9 +52,9 @@ public class PreferenceController {
                 preferenceModel.getReadPreference().getSimbolPlayerSecond(),
                 preferenceModel.getReadPreferenceToSave().getSimbolPlayerFirst());
         if (!Objects.equals(newSymbol, preferenceModel.getReadPreference().getSimbolPlayerSecond())){
-            infoBar.changeSymbolSecondPlayerSuccess();
+            observer.changeSymbolSecondPlayerSuccess();
         } else {
-            infoBar.changeSymbolSecondPlayerFail();
+            observer.changeSymbolSecondPlayerFail();
         }
         preferenceModel.setSimbolPlayerSecond(newSymbol);
     }
@@ -63,9 +64,9 @@ public class PreferenceController {
                 preferenceModel.getReadPreference().getSimbolPlayerFirst(),
                 preferenceModel.getReadPreferenceToSave().getSimbolPlayerSecond());
         if (!Objects.equals(newSymbol, preferenceModel.getReadPreference().getSimbolPlayerFirst())){
-            infoBar.changeSymbolFirstPlayerSuccess();
+            observer.changeSymbolFirstPlayerSuccess();
         } else {
-            infoBar.changeSymbolFirstPlayerFail();
+            observer.changeSymbolFirstPlayerFail();
         }
         preferenceModel.setSimbolPlayerFirst(newSymbol);
     }
@@ -73,9 +74,9 @@ public class PreferenceController {
     public void editColorPlayerSecond() {
         String color = preferenceView.showPopUpEditColor(preferenceModel.getReadPreferenceToSave().getColorPlayerSecond());
         if (!Objects.equals(color, preferenceModel.getReadPreferenceToSave().getColorPlayerSecond())){
-            infoBar.changeColorSecondPlayerSuccess();
+            observer.changeColorSecondPlayerSuccess();
         } else {
-            infoBar.changeColorSecondPlayerFail();
+            observer.changeColorSecondPlayerFail();
         }
         preferenceModel.setColorPlayerSecond(color);
     }
@@ -83,9 +84,9 @@ public class PreferenceController {
     public void editColorPlayerFirst() {
         String color = preferenceView.showPopUpEditColor(preferenceModel.getReadPreferenceToSave().getColorPlayerFirst());
         if (!Objects.equals(color, preferenceModel.getReadPreferenceToSave().getColorPlayerFirst())){
-            infoBar.changeColorFirstPlayerSuccess();
+            observer.changeColorFirstPlayerSuccess();
         } else {
-            infoBar.changeColorFirstPlayerFail();
+            observer.changeColorFirstPlayerFail();
         }
         preferenceModel.setColorPlayerFirst(color);
     }

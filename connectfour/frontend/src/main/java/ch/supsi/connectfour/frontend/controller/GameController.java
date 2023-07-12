@@ -4,10 +4,11 @@ package ch.supsi.connectfour.frontend.controller;
 import ch.supsi.connectfour.backend.utility.Move;
 import ch.supsi.connectfour.backend.utility.ReadMatch;
 import ch.supsi.connectfour.backend.utility.ReadPreference;
-import ch.supsi.connectfour.frontend.model.GameModel;
+import ch.supsi.connectfour.frontend.controller.observer.WriteObserver;
 import ch.supsi.connectfour.backend.utility.Match;
-import ch.supsi.connectfour.frontend.view.GameView;
+import ch.supsi.connectfour.frontend.model.ReadAndWriteGameModel;
 
+import ch.supsi.connectfour.frontend.view.WriteGameView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,12 +20,12 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class GameController {
+public class GameController implements WriteGameController{
     private boolean initialized=false;
     private ReadPreference readPreference;
-    private GameModel gameModel;
-    private GameView gameView;
-    private InfoBarController infoBar;
+    private ReadAndWriteGameModel gameModel;
+    private WriteGameView gameView;
+    private WriteObserver observer;
     // Grid Buttons
     public Button   b00, b01, b02, b03, b04, b05, b06,
                     b10, b11, b12, b13, b14, b15, b16,
@@ -84,9 +85,9 @@ public class GameController {
                     break;
             }
             if (firstPlayerTurn){
-                infoBar.changeTurnToPlayerOne();
+                observer.changeTurnToPlayerOne();
             } else {
-                infoBar.changeTurnToPlayerTwo();
+                observer.changeTurnToPlayerTwo();
             }
         }
     }
@@ -278,12 +279,12 @@ public class GameController {
     }
 
     //public
-    public void initializeExplicit(ReadPreference readPreference, GameView gameView, GameModel gameModel, InfoBarController infoBar) {
+    public void initializeExplicit(ReadPreference readPreference, WriteGameView gameView, ReadAndWriteGameModel gameModel, WriteObserver observer) {
         this.readPreference = readPreference;
         this.gameView=gameView;
         this.gameModel=gameModel;
         this.initialized=true;
-        this.infoBar=infoBar;
+        this.observer=observer;
         setDisable();
     }
 
@@ -294,12 +295,14 @@ public class GameController {
         this.gameModel.loadMatch(match);
         this.resetBoard();
         this.loadMoves(match.getMoves());
-        infoBar.loadMatch();
+        observer.loadMatch();
 
         if (match.getMoves().size() % 2 == 0){
-            infoBar.changeTurnToPlayerOne();
+            observer.changeTurnToPlayerOne();
+            firstPlayerTurn = true;
         } else {
-            infoBar.changeTurnToPlayerTwo();
+            observer.changeTurnToPlayerTwo();
+            firstPlayerTurn = false;
         }
     }
     public void newGame() {
@@ -307,13 +310,13 @@ public class GameController {
             if(gameView.showPopUpNewGame()){
                 this.gameModel.reset();
                 this.resetBoard();
-                infoBar.changeTurnToPlayerOne();
+                observer.changeTurnToPlayerOne();
             }
         } else {
             endGame = true;
             this.gameModel.reset();
             this.resetBoard();
-            infoBar.changeTurnToPlayerOne();
+            observer.changeTurnToPlayerOne();
         }
 
     }

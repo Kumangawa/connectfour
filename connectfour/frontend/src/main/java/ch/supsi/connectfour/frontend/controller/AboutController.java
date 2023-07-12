@@ -1,15 +1,14 @@
 package ch.supsi.connectfour.frontend.controller;
 
-import ch.supsi.connectfour.frontend.view.AboutView;
-import javafx.stage.Stage;
+import ch.supsi.connectfour.frontend.view.WriteAboutView;
 
-public class AboutController {
+public class AboutController implements WriteAboutController{
     private boolean inizialized=false;
 
-    private AboutView aboutView;
+    private WriteAboutView aboutView;
 
     //constructor
-    public AboutController( AboutView aboutView) {
+    public AboutController(WriteAboutView aboutView) {
         this.aboutView = aboutView;
     }
 
@@ -19,7 +18,6 @@ public class AboutController {
 
     //public
     public void initializeExplicit() {
-
         this.inizialized=true;
     }
     public void showAbout(){

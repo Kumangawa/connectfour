@@ -3,10 +3,7 @@ package ch.supsi.connectfour.frontend;
 
 import ch.supsi.connectfour.backend.controller.handler.LocalizationControllerHandler;
 import ch.supsi.connectfour.backend.utility.Match;
-import ch.supsi.connectfour.frontend.controller.AboutController;
-import ch.supsi.connectfour.frontend.controller.GameController;
-import ch.supsi.connectfour.frontend.controller.PersistenceController;
-import ch.supsi.connectfour.frontend.controller.PreferenceController;
+import ch.supsi.connectfour.frontend.controller.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,17 +16,17 @@ import java.util.Objects;
 public class MenuBar {
     private boolean inizialized=false;
     private LocalizationControllerHandler localizationControllerHandler;
-    private GameController gameController;
-    private PersistenceController persistenceController;
-    private PreferenceController preferenceController;
-    private AboutController aboutController;
+    private WriteGameController gameController;
+    private WritePersistenceController persistenceController;
+    private WritePreferenceController preferenceController;
+    private WriteAboutController aboutController;
 
     // Menu Items
     public MenuItem miNew, miOpen, miSave, miSaveAs, miQuit, miLanguage, miAbout;
 
-    public void initializeExplicit(LocalizationControllerHandler localizationControllerHandler, Stage stage, GameController gameController,
-                                   PersistenceController persistenceController, PreferenceController preferenceController,
-                                   AboutController aboutController
+    public void initializeExplicit(LocalizationControllerHandler localizationControllerHandler, WriteGameController gameController,
+                                   WritePersistenceController persistenceController, WritePreferenceController preferenceController,
+                                   WriteAboutController aboutController
     ) {
         this.localizationControllerHandler=localizationControllerHandler;
         this.gameController=gameController;

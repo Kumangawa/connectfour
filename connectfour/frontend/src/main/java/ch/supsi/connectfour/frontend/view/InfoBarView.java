@@ -3,7 +3,7 @@ package ch.supsi.connectfour.frontend.view;
 import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
 import javafx.scene.text.Text;
 
-public class InfoBarView {
+public class InfoBarView implements WriteInfoBarView{
     private LocalizationModelHandler localizationModelHandler;
 
     //constructor

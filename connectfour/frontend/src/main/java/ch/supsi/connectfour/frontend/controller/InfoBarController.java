@@ -1,23 +1,16 @@
 package ch.supsi.connectfour.frontend.controller;
 
-import ch.supsi.connectfour.frontend.view.InfoBarView;
+import ch.supsi.connectfour.frontend.view.WriteInfoBarView;
 import javafx.scene.text.Text;
 
-public class InfoBarController {
+public class InfoBarController implements WriteInfoBarController {
 
-    private InfoBarView infoBarView;
+    private WriteInfoBarView infoBarView;
     private boolean inizialized=false;
 
     public Text turnBar, infoBar;
 
-    /*
-    public void showMessage(String message) {
-        this.infoBar.setText(message);
-    }
-     */
-
-
-    public void initializeExplicit(InfoBarView infoBarView) {
+    public void initializeExplicit(WriteInfoBarView infoBarView) {
         this.infoBarView=infoBarView;
         this.inizialized=true;
     }

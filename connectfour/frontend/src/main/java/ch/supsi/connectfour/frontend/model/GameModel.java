@@ -2,8 +2,7 @@ package ch.supsi.connectfour.frontend.model;
 
 import ch.supsi.connectfour.backend.utility.*;
 
-
-public class GameModel {
+public class GameModel implements ReadAndWriteGameModel{
     private Match match;
     //constructor
     public GameModel(){

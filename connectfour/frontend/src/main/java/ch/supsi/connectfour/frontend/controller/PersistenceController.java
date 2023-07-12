@@ -4,21 +4,22 @@ import ch.supsi.connectfour.backend.utility.ReadMatch;
 import ch.supsi.connectfour.backend.utility.ReadPreference;
 import ch.supsi.connectfour.frontend.model.PersistenceModel;
 import ch.supsi.connectfour.backend.utility.Match;
-import ch.supsi.connectfour.frontend.view.PersistenceView;
+import ch.supsi.connectfour.frontend.model.ReadAndWritePersistenceModel;
+import ch.supsi.connectfour.frontend.view.WritePersistenceView;
 import javafx.application.Platform;
 
 import java.io.File;
 
-public class PersistenceController {
+public class PersistenceController implements WritePersistenceController {
     private boolean inizialized=false;
-    private PersistenceView persistenceView;
-    private PersistenceModel persistenceModel;
+    private WritePersistenceView persistenceView;
+    private ReadAndWritePersistenceModel persistenceModel;
     private ReadPreference readPreference;
     private ReadMatch readMatch;
     private Match match;
 
     //constructor
-    public PersistenceController(PersistenceView persistenceView, PersistenceModel persistenceModel, ReadPreference readPreference, ReadMatch readMatch) {
+    public PersistenceController(WritePersistenceView persistenceView, ReadAndWritePersistenceModel persistenceModel, ReadPreference readPreference, ReadMatch readMatch) {
         this.persistenceView = persistenceView;
         this.persistenceModel = persistenceModel;
         this.readPreference = readPreference;

@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AboutView {
+public class AboutView implements WriteAboutView{
     private Stage stage;
 
     private LocalizationModelHandler localizationModelHandler;
