@@ -32,6 +32,7 @@ public class PreferenceModel implements ReadAndWritePreferenceModel{
     }
 
     //private
+    //TODO: da modificare ".ser" con ".json"
     private void savePreference(){
         createFolderTicTacToeANDGameSaved();
         ObjectOutputStream out=null;
@@ -56,6 +57,7 @@ public class PreferenceModel implements ReadAndWritePreferenceModel{
     }
 
     //public
+    //TODO: da modificare ".ser" con ".json"
     public void initializeExplicit(){
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(Preference.defaultPath+"\\"+ "Preference.ser"));

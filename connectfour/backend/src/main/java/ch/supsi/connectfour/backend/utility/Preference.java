@@ -10,10 +10,10 @@ public class Preference implements Serializable, ReadAndWritePreference {
     private Boolean pathChanged;
     private String preferedPath;
     private String simbolPlayerFirst;       // Utilizzato durante il game
-    private String simbolPlayerSecond;           // Utilizzato durante il game
-    private String colorPlayerFirst;         // Utilizzato durante il game
-    private String colorPlayerSecond;             // Utilizzato durante il game
-    private String language;             // Da salvare nel file
+    private String simbolPlayerSecond;      // Utilizzato durante il game
+    private String colorPlayerFirst;        // Utilizzato durante il game
+    private String colorPlayerSecond;       // Utilizzato durante il game
+    private String language;                // Da salvare nel file
     public Preference() {
         this.pathChanged=false;
         this.preferedPath=defaultPath;

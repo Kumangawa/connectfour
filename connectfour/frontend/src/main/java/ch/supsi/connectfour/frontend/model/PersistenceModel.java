@@ -32,6 +32,7 @@ public class PersistenceModel implements ReadAndWritePersistenceModel{
     }
 
     //private
+    //TODO: da modificare ".ser" con ".json"
     private String checkSerializeName(String string){
         return string.endsWith(".ser") ? string: string+".ser";
     }

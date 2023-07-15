@@ -36,14 +36,6 @@ public class GameController implements WriteGameController{
 
     private boolean endGame;
     private boolean firstPlayerTurn = true;
-    private Button[][] buttonGrid = {
-            {b00, b01, b02, b03, b04, b05, b06},
-            {b10, b11, b12, b13, b14, b15, b16},
-            {b20, b21, b22, b23, b24, b25, b26},
-            {b30, b31, b32, b33, b34, b35, b36},
-            {b40, b41, b42, b43, b44, b45, b46},
-            {b50, b51, b52, b53, b54, b55, b56}
-    };
 
     //constructor
     public GameController() {
@@ -230,11 +222,95 @@ public class GameController implements WriteGameController{
         return r;
     }
     private Button fromCoordinatesToButton(int x, int y){
-        if (x >= 0 && x < buttonGrid.length && y >= 0 && y < buttonGrid[x].length) {
-            Button button = buttonGrid[x][y];
-            if (!button.isDisabled()) {
-                return button;
-            }
+        if (x==0&&y==0 && Objects.equals(b00.getText(), "")) {
+            return b00;
+        } else if (x==0&&y==1 && Objects.equals(b01.getText(), "")) {
+            return b01;
+        } else if (x==0&&y==2 && Objects.equals(b02.getText(), "")) {
+            return b02;
+        } else if (x==0&&y==3 && Objects.equals(b03.getText(), "")) {
+            return b03;
+        } else if (x==0&&y==4 && Objects.equals(b04.getText(), "")) {
+            return b04;
+        } else if (x==0&&y==5 && Objects.equals(b05.getText(), "")) {
+            return b05;
+        } else if (x==0&&y==6 && Objects.equals(b06.getText(), "")) {
+            return b06;
+
+        } else if (x==1&&y==0 && Objects.equals(b10.getText(), "")){
+            return b10;
+        } else if (x==1&&y==1 && Objects.equals(b11.getText(), "")) {
+            return b11;
+        } else if (x==1&&y==2 && Objects.equals(b12.getText(), "")) {
+            return b12;
+        } else if (x==1&&y==3 && Objects.equals(b13.getText(), "")) {
+            return b13;
+        } else if (x==1&&y==4 && Objects.equals(b14.getText(), "")) {
+            return b14;
+        } else if (x==1&&y==5 && Objects.equals(b15.getText(), "")) {
+            return b15;
+        } else if (x==1&&y==6 && Objects.equals(b16.getText(), "")) {
+            return b16;
+
+        } else if (x==2&&y==0 && Objects.equals(b20.getText(), "")) {
+            return b20;
+        } else if (x==2&&y==1 && Objects.equals(b21.getText(), "")){
+            return b21;
+        } else if (x==2&&y==2 && Objects.equals(b22.getText(), "")) {
+            return b21;
+        } else if (x==2&&y==3 && Objects.equals(b23.getText(), "")) {
+            return b23;
+        } else if (x==2&&y==4 && Objects.equals(b24.getText(), "")) {
+            return b24;
+        } else if (x==2&&y==5 && Objects.equals(b25.getText(), "")) {
+            return b25;
+        } else if (x==2&&y==6 && Objects.equals(b26.getText(), "")) {
+            return b26;
+
+        } else if (x==3&&y==0 && Objects.equals(b30.getText(), "")) {
+            return b30;
+        } else if (x==3&&y==1 && Objects.equals(b31.getText(), "")) {
+            return b31;
+        } else if (x==3&&y==2 && Objects.equals(b32.getText(), "")){
+            return b32;
+        } else if (x==3&&y==3 && Objects.equals(b33.getText(), "")) {
+            return b33;
+        } else if (x==3&&y==4 && Objects.equals(b34.getText(), "")) {
+            return b34;
+        } else if (x==3&&y==5 && Objects.equals(b35.getText(), "")) {
+            return b35;
+        } else if (x==3&&y==6 && Objects.equals(b36.getText(), "")) {
+            return b36;
+
+        } else if (x==4&&y==0 && Objects.equals(b40.getText(), "")) {
+            return b40;
+        } else if (x==4&&y==1 && Objects.equals(b41.getText(), "")) {
+            return b41;
+        } else if (x==4&&y==2 && Objects.equals(b42.getText(), "")) {
+            return b42;
+        } else if (x==4&&y==3 && Objects.equals(b43.getText(), "")){
+            return b43;
+        } else if (x==4&&y==4 && Objects.equals(b44.getText(), "")) {
+            return b44;
+        } else if (x==4&&y==5 && Objects.equals(b45.getText(), "")) {
+            return b45;
+        } else if (x==4&&y==6 && Objects.equals(b46.getText(), "")){
+            return b46;
+
+        } else if (x==5&&y==0 && Objects.equals(b50.getText(), "")) {
+            return b50;
+        } else if (x==5&&y==1 && Objects.equals(b51.getText(), "")) {
+            return b51;
+        } else if (x==5&&y==2 && Objects.equals(b52.getText(), "")) {
+            return b52;
+        } else if (x==5&&y==3 && Objects.equals(b53.getText(), "")){
+            return b53;
+        } else if (x==5&&y==4 && Objects.equals(b54.getText(), "")) {
+            return b54;
+        } else if (x==5&&y==5 && Objects.equals(b55.getText(), "")) {
+            return b55;
+        } else if (x==5&&y==6 && Objects.equals(b56.getText(), "")){
+            return b56;
         }
         return null;
     }

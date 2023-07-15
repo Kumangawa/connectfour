@@ -29,7 +29,7 @@ public class PersistenceView implements WritePersistenceView{
         FileChooser fileChooser=new FileChooser();
         fileChooser.setTitle(".");
         fileChooser.setInitialDirectory(new File(initialPath));
-        fileChooser.setInitialFileName("untitled.ser");
+        fileChooser.setInitialFileName("untitled.ser"); //TODO: da modificare in .json
         file=fileChooser.showSaveDialog(stage);
         try {
             return file.getAbsolutePath();
