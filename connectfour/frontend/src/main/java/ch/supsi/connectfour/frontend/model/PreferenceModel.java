@@ -2,6 +2,7 @@ package ch.supsi.connectfour.frontend.model;
 
 import ch.supsi.connectfour.backend.utility.Preference;
 import ch.supsi.connectfour.backend.utility.ReadPreference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -13,12 +14,15 @@ public class PreferenceModel implements ReadAndWritePreferenceModel{
     private boolean initialized =false;
     private Preference preference;
     private Preference preferenceToSave;
+    private ObjectMapper objectMapper;
     //constructor
     public PreferenceModel() {
+        this.objectMapper = new ObjectMapper();
     }
     public PreferenceModel(Preference preference) {
         this.preferenceToSave =new Preference(preference);
         this.preference=new Preference(preference);
+        this.objectMapper = new ObjectMapper();
     }
     //static
     private synchronized static void createFolderTicTacToeANDGameSaved(){
@@ -32,49 +36,47 @@ public class PreferenceModel implements ReadAndWritePreferenceModel{
     }
 
     //private
-    //TODO: da modificare ".ser" con ".json"
     private void savePreference(){
         createFolderTicTacToeANDGameSaved();
-        ObjectOutputStream out=null;
-        FileOutputStream fileOut=null;
+        String jsonString = "";
         try {
-            fileOut=new FileOutputStream(Preference.defaultPath+"\\"+ "Preference.ser");
-            out = new ObjectOutputStream(fileOut);
-            out.writeObject(this.preferenceToSave);
-        } catch (IOException e) {System.out.println("createFolderConnectFourANDGameSaved "+e.getMessage());}
-        finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-                if (fileOut != null) {
-                    fileOut.close();
-                }
-            } catch (IOException e) {
-                System.out.println("Error while closing streams: " + e.getMessage());
-            }
+            jsonString = objectMapper.writeValueAsString(this.preferenceToSave);
+        } catch (IOException e) {
+            System.out.println("savePreference: JsonProcessingException " + e.getMessage());
+        }
+        String serializedPath = Preference.defaultPath + "/Preference.json";
+        try {
+            Files.write(Path.of(serializedPath), jsonString.getBytes());
+        } catch (IOException e) {
+            System.out.println("savePreference: IOException " + e.getMessage());
         }
     }
 
     //public
-    //TODO: da modificare ".ser" con ".json"
     public void initializeExplicit(){
-        try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(Preference.defaultPath+"\\"+ "Preference.ser"));
-            this.preference=(Preference) in.readObject();
-            this.preferenceToSave=new Preference(preference);
-            in.close();
-        }catch (FileNotFoundException e) {
-            this.preference=new Preference();
-            this.preferenceToSave=new Preference();
-            this.savePreference();
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        String preferenceFilePath = Preference.defaultPath + "/Preference.json";
+        File preferenceFile = new File(preferenceFilePath);
+
+        if (preferenceFile.exists()) {
+            try {
+                byte[] jsonData = Files.readAllBytes(preferenceFile.toPath());
+                this.preference = objectMapper.readValue(jsonData, Preference.class);
+                this.preferenceToSave = new Preference(preference);
+            } catch (IOException e) {
+                System.out.println("initializeExplicit: IOException " + e.getMessage());
+                this.preference = new Preference();
+                this.preferenceToSave = new Preference();
+            }
+        } else {
+            this.preference = new Preference();
+            this.preferenceToSave = new Preference();
+            savePreference();
         }
-        if(this.preference.getPreferedPath()==null){
+
+        if (this.preference.getPreferedPath() == null) {
             this.changePreferedPath(Preference.defaultPath);
         }
-        this.initialized =true;
+        this.initialized = true;
     }
     public boolean isInitialized() {
         return initialized;

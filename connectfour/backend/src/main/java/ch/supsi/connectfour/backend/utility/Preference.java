@@ -1,10 +1,14 @@
 package ch.supsi.connectfour.backend.utility;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+import java.io.IOException;
 import java.io.File;
-import java.io.Serializable;
 
 
-public class Preference implements Serializable, ReadAndWritePreference {
+public class Preference implements ReadAndWritePreference {
     public static final String defaultPath=(String) System.getProperties().get("user.home")+File.separator+"connectfour";
     //fields
     private Boolean pathChanged;
@@ -98,5 +102,18 @@ public class Preference implements Serializable, ReadAndWritePreference {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    // Metodo per serializzare in JSON
+    public String toJson() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        return objectMapper.writeValueAsString(this);
+    }
+
+    // Metodo per deserializzare da JSON
+    public static Preference fromJson(String json) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(json, Preference.class);
     }
 }

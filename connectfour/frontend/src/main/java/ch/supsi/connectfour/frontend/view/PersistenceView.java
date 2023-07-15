@@ -29,7 +29,7 @@ public class PersistenceView implements WritePersistenceView{
         FileChooser fileChooser=new FileChooser();
         fileChooser.setTitle(".");
         fileChooser.setInitialDirectory(new File(initialPath));
-        fileChooser.setInitialFileName("untitled.ser"); //TODO: da modificare in .json
+        fileChooser.setInitialFileName("untitled.json");
         file=fileChooser.showSaveDialog(stage);
         try {
             return file.getAbsolutePath();
@@ -43,9 +43,9 @@ public class PersistenceView implements WritePersistenceView{
             FileChooser fileChooser=new FileChooser();
             fileChooser.setTitle(".");
             fileChooser.setInitialDirectory(new File(initialPath));
-            //fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter(".ser"));
             file=fileChooser.showOpenDialog(this.stage);
-        }finally {
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return file;
     }

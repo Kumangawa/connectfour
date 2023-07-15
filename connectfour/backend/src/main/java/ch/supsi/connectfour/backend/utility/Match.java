@@ -1,13 +1,18 @@
 package ch.supsi.connectfour.backend.utility;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 
-public class Match implements Serializable ,ReadMatch{
+public class Match implements ReadMatch{
     private ArrayList<Move> moves=new ArrayList<Move>();
 
     public Match() {}
-    public Match( ArrayList<Move> moves) {
+    @JsonCreator
+    public Match(@JsonProperty("moves") ArrayList<Move> moves) {
         this.moves = moves;
     }
     public Match(Match match) {
@@ -94,5 +99,14 @@ public class Match implements Serializable ,ReadMatch{
     @Override
     public boolean equals(Match match) {
         return false;
+    }
+    public String toJson() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(this);
+    }
+
+    public static Match fromJson(String json) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(json, Match.class);
     }
 }
