@@ -8,7 +8,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.DosFileAttributeView;
 
 public class PreferenceModel implements ReadAndWritePreferenceModel{
     private boolean initialized =false;
@@ -27,12 +26,21 @@ public class PreferenceModel implements ReadAndWritePreferenceModel{
     //static
     private synchronized static void createFolderTicTacToeANDGameSaved(){
         try {
-            Files.createDirectories(Paths.get(Preference.defaultPath));
-            Files.createDirectories(Path.of(Paths.get(Preference.defaultPath) + "\\GameSaved"));
-            // Set the "hidden" attribute
-            DosFileAttributeView dosView = Files.getFileAttributeView(Path.of(Preference.defaultPath), DosFileAttributeView.class);
-            dosView.setHidden(true);
-        }catch (IOException e) {System.out.println("createFolderConnectFourANDGameSaved "+e.getMessage());}
+            Path defaultPath = Paths.get(Preference.defaultPath);
+            Files.createDirectories(defaultPath);
+
+            Path gameSavedPath = defaultPath.resolve("GameSaved");
+            Files.createDirectories(gameSavedPath);
+
+            // Opzionale: Nascondi la directory
+            File defaultPathFile = defaultPath.toFile();
+            if (defaultPathFile.isHidden()) {
+                defaultPathFile.setReadable(true);
+                defaultPathFile.setExecutable(true);
+            }
+        } catch (IOException e) {
+            System.out.println("createFolderTicTacToeANDGameSaved: " + e.getMessage());
+        }
     }
 
     //private
