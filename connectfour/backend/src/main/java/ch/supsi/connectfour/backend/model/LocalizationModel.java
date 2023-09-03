@@ -1,78 +1,64 @@
 package ch.supsi.connectfour.backend.model;
 
-import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
+import ch.supsi.connectfour.backend.service.LocalizationServiceHandler;
 
 import java.util.Locale;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-public class LocalizationModel implements LocalizationModelHandler {
+public class LocalizationModel implements LocalizationModelHandler{
 
-    private boolean initialized=false;
+    private LocalizationServiceHandler localizationHandler;
+    private boolean isInizialized=false;
 
-    private String bundleName;
-
-    private Locale locale;
-
-    private ResourceBundle translations;
-
-
-
-    //constructor
-    public LocalizationModel(String bundleName, Locale locale) {
-        this.bundleName = bundleName;
-        this.locale = locale;
-        this.translations = ResourceBundle.getBundle(bundleName, locale);
+    public LocalizationModel(LocalizationServiceHandler handler) {
+        this.localizationHandler = handler;
     }
 
-    //static
 
-    //private
-
-    //public
-
-    @Override
     public void initializeExplicit() {
-        this.initialized=true;
+        this.isInizialized=true;
     }
 
-    @Override
-    public boolean isInitialized() {
-        return initialized;
-    }
     @Override
     public String getBundleName() {
-        return this.bundleName;
+        if (localizationHandler.isInitialized()) {
+            return localizationHandler.getBundleName();
+        }
+
+        return null;
     }
 
     @Override
     public Locale getLocale() {
-        return this.locale;
-    }
+        if (localizationHandler.isInitialized()) {
+            return localizationHandler.getLocale();
+        }
 
+        return null;
+    }
     @Override
     public ResourceBundle getResourceBundle() {
-        return this.translations;
-    }
+        if (localizationHandler.isInitialized()) {
+            return localizationHandler.getResourceBundle();
+        }
 
+        return null;
+    }
     @Override
     public String localize(String key) {
         if (key == null || key.isEmpty()) {
-            // should handle exception
-
             return "";
         }
 
-        String translation;
-
-        try {
-            translation = translations.getString(key);
-
-        } catch (MissingResourceException e) {
-            translation = key;
+        if (localizationHandler.isInitialized()) {
+            return localizationHandler.localize(key);
         }
 
-        return translation;
+        return key;
     }
 
+    @Override
+    public boolean isInitialized() {
+        return isInizialized;
+    }
 }

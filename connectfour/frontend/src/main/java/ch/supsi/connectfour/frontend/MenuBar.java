@@ -1,8 +1,6 @@
 package ch.supsi.connectfour.frontend;
 
-
-import ch.supsi.connectfour.backend.controller.handler.LocalizationControllerHandler;
-import ch.supsi.connectfour.backend.utility.Match;
+import ch.supsi.connectfour.backend.model.Match;
 import ch.supsi.connectfour.frontend.controller.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -14,20 +12,18 @@ import java.util.Objects;
 
 public class MenuBar {
     private boolean inizialized=false;
-    private LocalizationControllerHandler localizationControllerHandler;
-    private WriteGameController gameController;
-    private WritePersistenceController persistenceController;
-    private WritePreferenceController preferenceController;
-    private WriteAboutController aboutController;
+    private GameControllerInterface gameController;
+    private PersistenceControllerInterface persistenceController;
+    private PreferenceControllerInterface preferenceController;
+    private AboutControllerInterface aboutController;
 
     // Menu Items
     public MenuItem miNew, miOpen, miSave, miSaveAs, miQuit, miLanguage, miAbout;
 
-    public void initializeExplicit(LocalizationControllerHandler localizationControllerHandler, WriteGameController gameController,
-                                   WritePersistenceController persistenceController, WritePreferenceController preferenceController,
-                                   WriteAboutController aboutController
+    public void initializeExplicit(GameControllerInterface gameController,
+                                   PersistenceControllerInterface persistenceController, PreferenceControllerInterface preferenceController,
+                                   AboutControllerInterface aboutController
     ) {
-        this.localizationControllerHandler=localizationControllerHandler;
         this.gameController=gameController;
         this.persistenceController=persistenceController;
         this.preferenceController=preferenceController;

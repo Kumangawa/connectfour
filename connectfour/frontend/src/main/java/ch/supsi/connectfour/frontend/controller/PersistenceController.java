@@ -1,25 +1,25 @@
 package ch.supsi.connectfour.frontend.controller;
 
-import ch.supsi.connectfour.backend.utility.ReadMatch;
-import ch.supsi.connectfour.backend.utility.ReadPreference;
+import ch.supsi.connectfour.backend.model.MatchInterface;
+import ch.supsi.connectfour.backend.model.PreferenceInterface;
 import ch.supsi.connectfour.frontend.model.PersistenceModel;
-import ch.supsi.connectfour.backend.utility.Match;
-import ch.supsi.connectfour.frontend.model.ReadAndWritePersistenceModel;
-import ch.supsi.connectfour.frontend.view.WritePersistenceView;
+import ch.supsi.connectfour.backend.model.Match;
+import ch.supsi.connectfour.frontend.model.PersistenceModelInterface;
+import ch.supsi.connectfour.frontend.view.PersistenceViewInterface;
 import javafx.application.Platform;
 
 import java.io.File;
 
-public class PersistenceController implements WritePersistenceController {
+public class PersistenceController implements PersistenceControllerInterface {
     private boolean inizialized=false;
-    private WritePersistenceView persistenceView;
-    private ReadAndWritePersistenceModel persistenceModel;
-    private ReadPreference readPreference;
-    private ReadMatch readMatch;
+    private PersistenceViewInterface persistenceView;
+    private PersistenceModelInterface persistenceModel;
+    private PreferenceInterface readPreference;
+    private MatchInterface readMatch;
     private Match match;
 
     //constructor
-    public PersistenceController(WritePersistenceView persistenceView, ReadAndWritePersistenceModel persistenceModel, ReadPreference readPreference, ReadMatch readMatch) {
+    public PersistenceController(PersistenceViewInterface persistenceView, PersistenceModelInterface persistenceModel, PreferenceInterface readPreference, MatchInterface readMatch) {
         this.persistenceView = persistenceView;
         this.persistenceModel = persistenceModel;
         this.readPreference = readPreference;
@@ -38,10 +38,8 @@ public class PersistenceController implements WritePersistenceController {
         this.inizialized=true;
     }
 
-
     public boolean hasSaved(){
         return (this.persistenceModel.isSaved()&&this.saveIsUpToDate());
-        //return this.saveIsUpToDate();
     }
     public boolean saveIsUpToDate(){
         if (this.match==null){

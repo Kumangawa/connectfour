@@ -1,6 +1,6 @@
 package ch.supsi.connectfour.frontend.view;
 
-public interface WriteAboutView {
+public interface AboutViewInterface {
 
     public void showAbout();
 }

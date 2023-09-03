@@ -1,13 +1,14 @@
 package ch.supsi.connectfour.frontend;
 
 import ch.supsi.connectfour.backend.controller.LocalizationController;
-import ch.supsi.connectfour.backend.controller.handler.LocalizationControllerHandler;
+import ch.supsi.connectfour.backend.controller.LocalizationControllerHandler;
 import ch.supsi.connectfour.backend.model.LocalizationModel;
-import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
-import ch.supsi.connectfour.backend.utility.ReadMatch;
-import ch.supsi.connectfour.backend.utility.ReadPreference;
+import ch.supsi.connectfour.backend.model.LocalizationModelHandler;
+import ch.supsi.connectfour.backend.service.LocalizationService;
+import ch.supsi.connectfour.backend.service.LocalizationServiceHandler;
+import ch.supsi.connectfour.backend.model.PreferenceInterface;
+import ch.supsi.connectfour.backend.model.MatchInterface;
 import ch.supsi.connectfour.frontend.controller.*;
-import ch.supsi.connectfour.frontend.controller.observer.Observer;
 import ch.supsi.connectfour.frontend.model.GameModel;
 import ch.supsi.connectfour.frontend.model.PersistenceModel;
 import ch.supsi.connectfour.frontend.model.PreferenceModel;
@@ -48,16 +49,14 @@ public class AppFx extends Application {
     private MenuBar menuBar;
 
     /**INFO BAR**/
-    private InfoBarController infoBarController;
     private InfoBarView infoBarView;
-
-    private Observer observer;
 
 
     //backend
     /**Localization**/
     private LocalizationControllerHandler localizationControllerHandler;
     private LocalizationModelHandler localizationModelHandler;
+    private LocalizationServiceHandler localizationServiceHandler;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -65,24 +64,25 @@ public class AppFx extends Application {
         // Serve istanziarlo subito per dare la lingua al localize
         preferenceModel=new PreferenceModel();
         preferenceModel.initializeExplicit();
-        ReadPreference readPreference= preferenceModel.getReadPreference();
+        PreferenceInterface readPreference= preferenceModel.getReadPreferenceToSave();
 
-        localizationModelHandler = new LocalizationModel("i18n.translations", Locale.forLanguageTag(readPreference.getLanguage()));
+        localizationServiceHandler = new LocalizationService("i18n.translations", Locale.forLanguageTag(readPreference.getLanguage()));
+        localizationModelHandler = new LocalizationModel(localizationServiceHandler);
         localizationControllerHandler = new LocalizationController(localizationModelHandler);
 
-        preferenceView=new PreferenceView(localizationModelHandler, stage);
+        preferenceView=new PreferenceView(localizationServiceHandler, stage);
         preferenceController=new PreferenceController(preferenceModel,preferenceView);
 
 
         gameModel=new GameModel();
-        gameView=new GameView(localizationModelHandler);
-        ReadMatch readMatch= gameModel.getReadMatch();
+        gameView=new GameView(localizationServiceHandler);
+        MatchInterface readMatch= gameModel.getReadMatch();
 
         persistenceModel=new PersistenceModel(readPreference);
-        persistenceView=new PersistenceView(stage, localizationModelHandler);
+        persistenceView=new PersistenceView(stage, localizationServiceHandler);
         persistenceController=new PersistenceController(persistenceView, persistenceModel, readPreference,readMatch);
 
-        aboutView=new AboutView(stage, localizationModelHandler);
+        aboutView=new AboutView(stage, localizationServiceHandler);
         aboutController=new AboutController(aboutView);
 
 
@@ -93,6 +93,7 @@ public class AppFx extends Application {
 
 
         /**LocalizationInizialiation**/
+        localizationServiceHandler.initializeExplicit();
         localizationModelHandler.initializeExplicit();
         localizationControllerHandler.initializeExplicit();
 
@@ -117,18 +118,15 @@ public class AppFx extends Application {
 
         FXMLLoader infoBarLoader = new FXMLLoader(infoBarFxmlUrl, localizationControllerHandler.getResourceBundle());
         Parent infoBar = infoBarLoader.load();
-        infoBarController = (InfoBarController) infoBarLoader.getController();
+        infoBarView = (InfoBarView) infoBarLoader.getController();
 
-        infoBarView=new InfoBarView(localizationModelHandler);
-        infoBarController.initializeExplicit(infoBarView);
+        infoBarView.initializeExplicit(localizationServiceHandler);
 
-        observer= new Observer(infoBarController);
-
-        preferenceController.initializeInfoBar(observer);
+        preferenceController.initializeInfoBar(infoBarView);
 
         /**GAME_CONTROLLER**/
         gameController = playingGridFxmlLoader.getController();
-        gameController.initializeExplicit(readPreference,  gameView,  gameModel, observer);
+        gameController.initializeExplicit(readPreference,  gameView,  gameModel, infoBarView);
 
         /**PERSISTENCE**/
 
@@ -147,8 +145,7 @@ public class AppFx extends Application {
         FXMLLoader menuBarLoader = new FXMLLoader(menuBarFxmlUrl, localizationControllerHandler.getResourceBundle());
         Parent menuBar = menuBarLoader.load();
         this.menuBar = menuBarLoader.getController();
-        this.menuBar.initializeExplicit(localizationControllerHandler, gameController,
-                persistenceController, preferenceController, aboutController);
+        this.menuBar.initializeExplicit(gameController, persistenceController, preferenceController, aboutController);
 
 
 

@@ -1,15 +1,14 @@
 package ch.supsi.connectfour.frontend.controller;
 
 
+import ch.supsi.connectfour.backend.model.MatchInterface;
+import ch.supsi.connectfour.backend.model.PreferenceInterface;
 import ch.supsi.connectfour.backend.utility.Move;
-import ch.supsi.connectfour.backend.utility.ReadMatch;
-import ch.supsi.connectfour.backend.utility.ReadPreference;
-import ch.supsi.connectfour.frontend.controller.observer.WriteObserver;
-import ch.supsi.connectfour.backend.utility.Match;
-import ch.supsi.connectfour.frontend.model.ReadAndWriteGameModel;
+import ch.supsi.connectfour.backend.model.Match;
+import ch.supsi.connectfour.frontend.model.GameModelInterface;
 
-import ch.supsi.connectfour.frontend.view.WriteGameView;
-import javafx.application.Platform;
+import ch.supsi.connectfour.frontend.view.GameViewInterface;
+import ch.supsi.connectfour.frontend.view.InfoBarViewInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,19 +19,20 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class GameController implements WriteGameController{
+public class GameController implements GameControllerInterface {
     private boolean initialized=false;
-    private ReadPreference readPreference;
-    private ReadAndWriteGameModel gameModel;
-    private WriteGameView gameView;
-    private WriteObserver observer;
+    private PreferenceInterface readPreference;
+    private GameModelInterface gameModel;
+    private GameViewInterface gameView;
+    private InfoBarViewInterface infoBarView;
     // Grid Buttons
     public Button   b00, b01, b02, b03, b04, b05, b06,
                     b10, b11, b12, b13, b14, b15, b16,
                     b20, b21, b22, b23, b24, b25, b26,
                     b30, b31, b32, b33, b34, b35, b36,
                     b40, b41, b42, b43, b44, b45, b46,
-                    b50, b51, b52, b53, b54, b55, b56;
+                    b50, b51, b52, b53, b54, b55, b56,
+                    b60, b61, b62, b63, b64, b65, b66;
 
     private boolean endGame;
     private boolean firstPlayerTurn = true;
@@ -47,40 +47,48 @@ public class GameController implements WriteGameController{
     @FXML
     private void playerMove(ActionEvent e) {
         Button clickedButton = (Button) e.getSource();
-        if (!clickedButton.isDisabled()) {
-            int columnIndex = getColumnIndex(clickedButton);
-            Button targetButton = getBottomButtonInColumn(columnIndex);
-            if (firstPlayerTurn){
-                gameView.showMove(targetButton, trasformColor(readPreference.getColorPlayerFirst()), readPreference.getSimbolPlayerFirst());
+        int columnIndex = getColumnIndex(clickedButton);
+        Button targetButton = getBottomButtonInColumn(columnIndex);
+        if (targetButton != null) {
+            if (firstPlayerTurn) {
+                gameView.showMove(targetButton, trasformColor(readPreference.getCurrentColorPlayer(0)), readPreference.getCurrentSymbolPlayer(0));
             } else {
-                gameView.showMove(targetButton, trasformColor(readPreference.getColorPlayerSecond()), readPreference.getSimbolPlayerSecond());
+                gameView.showMove(targetButton, trasformColor(readPreference.getCurrentColorPlayer(1)), readPreference.getCurrentSymbolPlayer(1));
             }
-            int[] coordinates= fromButtonToCoordinates(targetButton);
-            gameModel.playerMoved(coordinates[0],coordinates[1], firstPlayerTurn);
+            int[] coordinates = fromButtonToCoordinates(targetButton);
+            gameModel.playerMoved(coordinates[0], coordinates[1], firstPlayerTurn);
             firstPlayerTurn = !firstPlayerTurn;
 
-            switch (gameModel.isFinished()){
-                //draw
-                case -1:
-                    endGame(gameView.showPopUpEnd( -1));
-                    break;
-                case 0:
-                    // The game is still on
-                    break;
-                //win playerFirst
-                case 1:
-                    endGame(gameView.showPopUpEnd( 1));
-                    break;
-                //win playerSecond
-                case 2:
-                    endGame(gameView.showPopUpEnd( 2));
-                    break;
-            }
-            if (firstPlayerTurn){
-                observer.changeTurnToPlayerOne();
+            if (firstPlayerTurn) {
+                infoBarView.changeTurnToPlayerOne();
             } else {
-                observer.changeTurnToPlayerTwo();
+                infoBarView.changeTurnToPlayerTwo();
             }
+
+            controll();
+        }
+    }
+
+    private void controll(){
+        switch (gameModel.isFinished()) {
+            //draw
+            case -1:
+                infoBarView.endGameDraw();
+                endGame();
+                break;
+            case 0:
+                // The game is still on
+                break;
+            //win playerFirst
+            case 1:
+                infoBarView.endGameWin(1);
+                endGame();
+                break;
+            //win playerSecond
+            case 2:
+                infoBarView.endGameWin(2);
+                endGame();
+                break;
         }
     }
 
@@ -96,8 +104,10 @@ public class GameController implements WriteGameController{
                 return b20;
             } else if (Objects.equals(b10.getText(), "")) {
                 return b10;
-            } else {
+            } else if (Objects.equals(b00.getText(), "")) {
                 return b00;
+            } else {
+                return null;
             }
         } else if (columnIndex == 1) {
             if (Objects.equals(b51.getText(), "")) {
@@ -110,8 +120,10 @@ public class GameController implements WriteGameController{
                 return b21;
             } else if (Objects.equals(b11.getText(), "")) {
                 return b11;
-            } else {
+            } else if (Objects.equals(b01.getText(), "")) {
                 return b01;
+            } else {
+                return null;
             }
         } else if (columnIndex == 2) {
             if (Objects.equals(b52.getText(), "")) {
@@ -124,8 +136,10 @@ public class GameController implements WriteGameController{
                 return b22;
             } else if (Objects.equals(b12.getText(), "")) {
                 return b12;
-            } else {
+            } else if (Objects.equals(b02.getText(), "")) {
                 return b02;
+            } else {
+                return null;
             }
         } else if (columnIndex == 3) {
             if (Objects.equals(b53.getText(), "")) {
@@ -138,8 +152,10 @@ public class GameController implements WriteGameController{
                 return b23;
             } else if (Objects.equals(b13.getText(), "")) {
                 return b13;
-            } else {
+            } else if (Objects.equals(b03.getText(), "")) {
                 return b03;
+            } else {
+                return null;
             }
         } else if (columnIndex == 4) {
             if (Objects.equals(b54.getText(), "")) {
@@ -152,8 +168,10 @@ public class GameController implements WriteGameController{
                 return b24;
             } else if (Objects.equals(b14.getText(), "")) {
                 return b14;
-            } else {
+            } else if (Objects.equals(b04.getText(), "")) {
                 return b04;
+            } else {
+                return null;
             }
         } else if (columnIndex == 5) {
             if (Objects.equals(b55.getText(), "")) {
@@ -166,8 +184,10 @@ public class GameController implements WriteGameController{
                 return b25;
             } else if (Objects.equals(b15.getText(), "")) {
                 return b15;
-            } else {
+            } else if (Objects.equals(b05.getText(), "")) {
                 return b05;
+            } else {
+                return null;
             }
         } else {
             if (Objects.equals(b56.getText(), "")) {
@@ -180,22 +200,22 @@ public class GameController implements WriteGameController{
                 return b26;
             } else if (Objects.equals(b16.getText(), "")) {
                 return b16;
-            } else {
+            } else if (Objects.equals(b06.getText(), "")) {
                 return b06;
+            } else {
+                return null;
             }
         }
     }
 
-    @FXML
-    private void endGame(boolean choice){
-        if (choice){
-            // if the player want to play again
-            endGame = false;
-            newGame();
-        } else {
-            // if the player want to exit
-            Platform.exit();
-        }
+    private void endGame(){
+        b60.setDisable(true);
+        b61.setDisable(true);
+        b62.setDisable(true);
+        b63.setDisable(true);
+        b64.setDisable(true);
+        b65.setDisable(true);
+        b66.setDisable(true);
     }
 
     private int getColumnIndex(Button button) {
@@ -257,7 +277,7 @@ public class GameController implements WriteGameController{
         } else if (x==2&&y==1 && Objects.equals(b21.getText(), "")){
             return b21;
         } else if (x==2&&y==2 && Objects.equals(b22.getText(), "")) {
-            return b21;
+            return b22;
         } else if (x==2&&y==3 && Objects.equals(b23.getText(), "")) {
             return b23;
         } else if (x==2&&y==4 && Objects.equals(b24.getText(), "")) {
@@ -322,10 +342,10 @@ public class GameController implements WriteGameController{
             if (button==null) return false;
             if(move.player==1){
                 gameView.showMove(button,
-                        trasformColor(readPreference.getColorPlayerFirst()), readPreference.getSimbolPlayerFirst());
+                        trasformColor(readPreference.getCurrentColorPlayer(0)), readPreference.getCurrentSymbolPlayer(0));
             }else{
                 gameView.showMove(button,
-                        trasformColor(readPreference.getColorPlayerSecond()), readPreference.getSimbolPlayerSecond());
+                        trasformColor(readPreference.getCurrentColorPlayer(1)), readPreference.getCurrentSymbolPlayer(1));
             }
         }
         return true;
@@ -343,6 +363,14 @@ public class GameController implements WriteGameController{
         for (Button button : buttonsToDisable) {
             button.setText("");
         }
+
+        b60.setDisable(false);
+        b61.setDisable(false);
+        b62.setDisable(false);
+        b63.setDisable(false);
+        b64.setDisable(false);
+        b65.setDisable(false);
+        b66.setDisable(false);
     }
 
     private void setDisable(){
@@ -355,44 +383,43 @@ public class GameController implements WriteGameController{
     }
 
     //public
-    public void initializeExplicit(ReadPreference readPreference, WriteGameView gameView, ReadAndWriteGameModel gameModel, WriteObserver observer) {
+    public void initializeExplicit(PreferenceInterface readPreference, GameViewInterface gameView, GameModelInterface gameModel, InfoBarViewInterface infoBarView) {
         this.readPreference = readPreference;
         this.gameView=gameView;
         this.gameModel=gameModel;
         this.initialized=true;
-        this.observer=observer;
+        this.infoBarView=infoBarView;
         setDisable();
     }
 
-    public ReadMatch getReadMatch(){
+    public MatchInterface getReadMatch(){
         return this.gameModel.getReadMatch();
     }
     public void loadMatch(Match match){
         this.gameModel.loadMatch(match);
         this.resetBoard();
         this.loadMoves(match.getMoves());
-        observer.loadMatch();
+        infoBarView.loadMatch();
 
         if (match.getMoves().size() % 2 == 0){
-            observer.changeTurnToPlayerOne();
+            infoBarView.changeTurnToPlayerOne();
             firstPlayerTurn = true;
         } else {
-            observer.changeTurnToPlayerTwo();
+            infoBarView.changeTurnToPlayerTwo();
             firstPlayerTurn = false;
         }
+        controll();
     }
     public void newGame() {
         if(this.gameModel.isGameInProgress() && endGame){
             if(gameView.showPopUpNewGame()){
                 this.gameModel.reset();
                 this.resetBoard();
-                observer.changeTurnToPlayerOne();
             }
         } else {
             endGame = true;
             this.gameModel.reset();
             this.resetBoard();
-            observer.changeTurnToPlayerOne();
         }
 
     }

@@ -1,6 +1,6 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
+import ch.supsi.connectfour.backend.service.LocalizationServiceHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,15 +9,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AboutView implements WriteAboutView{
+public class AboutView implements AboutViewInterface {
     private Stage stage;
 
-    private LocalizationModelHandler localizationModelHandler;
+    private LocalizationServiceHandler localizationServiceHandler;
 
     //constructor
-    public AboutView(Stage stage, LocalizationModelHandler localizationModelHandler) {
+    public AboutView(Stage stage, LocalizationServiceHandler localizationServiceHandler) {
         this.stage = stage;
-        this.localizationModelHandler = localizationModelHandler;
+        this.localizationServiceHandler = localizationServiceHandler;
     }
     //static
 
@@ -26,14 +26,14 @@ public class AboutView implements WriteAboutView{
     //public
     public void showAbout(){
         Stage popupStage = new Stage();
-        popupStage.setTitle(this.localizationModelHandler.localize("message.about.title"));
+        popupStage.setTitle(this.localizationServiceHandler.localize("message.about.title"));
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.initOwner(this.stage);
 
         // Create a label for the message
         Label messageLabel = new Label("ConnectFour 1.0 \n authors: \n Alex Petralli\n Samuele Saporito");
 
-        Button closeButton = new Button(this.localizationModelHandler.localize("message.about.close"));
+        Button closeButton = new Button(this.localizationServiceHandler.localize("message.about.close"));
         closeButton.setOnAction(event -> popupStage.close());
 
         VBox popupRoot = new VBox(messageLabel, closeButton);

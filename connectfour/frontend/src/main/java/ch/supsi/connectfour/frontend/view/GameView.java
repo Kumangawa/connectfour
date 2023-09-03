@@ -1,18 +1,18 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
+import ch.supsi.connectfour.backend.service.LocalizationServiceHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class GameView implements WriteGameView{
-    private LocalizationModelHandler localizationModelHandler;
+public class GameView implements GameViewInterface {
+    private LocalizationServiceHandler localizationServiceHandler;
 
     //constructor
-    public GameView(LocalizationModelHandler localizationModelHandler) {
-        this.localizationModelHandler = localizationModelHandler;
+    public GameView(LocalizationServiceHandler localizationServiceHandler) {
+        this.localizationServiceHandler = localizationServiceHandler;
     }
 
     //static
@@ -29,22 +29,21 @@ public class GameView implements WriteGameView{
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         if (ending == -1){
             // Draw
-            alert.setTitle(this.localizationModelHandler.localize("message.endgame.draw.title"));
-            alert.setHeaderText(this.localizationModelHandler.localize("message.endgame.draw.text"));
+            alert.setTitle(this.localizationServiceHandler.localize("message.endgame.draw.title"));
+            alert.setHeaderText(this.localizationServiceHandler.localize("message.endgame.draw.text"));
         } else if (ending == 1) {
-            // Win Player
-            alert.setTitle(this.localizationModelHandler.localize("message.endgame.win.player.one.title"));
-            alert.setHeaderText(this.localizationModelHandler.localize("message.endgame.win.player.one.text"));
+            // Win Player 1
+            alert.setTitle(this.localizationServiceHandler.localize("message.endgame.win.player.one.title"));
+            alert.setHeaderText(this.localizationServiceHandler.localize("message.endgame.win.player.one.text"));
         } else {
-            // Win AI
-            alert.setTitle(this.localizationModelHandler.localize("message.endgame.win.player.two.title"));
-            alert.setHeaderText(this.localizationModelHandler.localize("message.endgame.win.player.two.text"));
+            // Win Player 2
+            alert.setTitle(this.localizationServiceHandler.localize("message.endgame.win.player.two.title"));
+            alert.setHeaderText(this.localizationServiceHandler.localize("message.endgame.win.player.two.text"));
         }
 
-
         // Aggiungi i pulsanti per la conferma o la cancellazione
-        ButtonType confermaButton = new ButtonType(this.localizationModelHandler.localize("message.endgame.newgame"));
-        ButtonType cancellaButton = new ButtonType(this.localizationModelHandler.localize("message.endgame.exit"));
+        ButtonType confermaButton = new ButtonType(this.localizationServiceHandler.localize("message.endgame.newgame"));
+        ButtonType cancellaButton = new ButtonType(this.localizationServiceHandler.localize("message.endgame.exit"));
 
         alert.getButtonTypes().setAll(confermaButton, cancellaButton);
 
@@ -75,14 +74,12 @@ public class GameView implements WriteGameView{
     public boolean showPopUpNewGame() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
-        alert.setTitle(this.localizationModelHandler.localize("message.newgame.title"));
-        alert.setHeaderText(this.localizationModelHandler.localize("message.newgame.text"));
-
-
+        alert.setTitle(this.localizationServiceHandler.localize("message.newgame.title"));
+        alert.setHeaderText(this.localizationServiceHandler.localize("message.newgame.text"));
 
         // Aggiungi i pulsanti per la conferma o la cancellazione
-        ButtonType confermaButton = new ButtonType(this.localizationModelHandler.localize("message.quit.confirm"));
-        ButtonType cancellaButton = new ButtonType(this.localizationModelHandler.localize("message.quit.cancel"));
+        ButtonType confermaButton = new ButtonType(this.localizationServiceHandler.localize("message.quit.confirm"));
+        ButtonType cancellaButton = new ButtonType(this.localizationServiceHandler.localize("message.quit.cancel"));
 
         alert.getButtonTypes().setAll(confermaButton, cancellaButton);
 

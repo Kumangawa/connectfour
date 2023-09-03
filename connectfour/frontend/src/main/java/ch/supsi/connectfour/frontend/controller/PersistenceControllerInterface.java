@@ -1,8 +1,8 @@
 package ch.supsi.connectfour.frontend.controller;
 
-import ch.supsi.connectfour.backend.utility.Match;
+import ch.supsi.connectfour.backend.model.Match;
 
-public interface WritePersistenceController {
+public interface PersistenceControllerInterface {
 
     public void initializeExplicit();
     public boolean hasSaved();

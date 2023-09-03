@@ -1,68 +1,85 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
+import ch.supsi.connectfour.backend.service.LocalizationServiceHandler;
 import javafx.scene.text.Text;
 
-public class InfoBarView implements WriteInfoBarView{
-    private LocalizationModelHandler localizationModelHandler;
+public class InfoBarView implements InfoBarViewInterface {
 
-    //constructor
-    public InfoBarView(LocalizationModelHandler localizationModelHandler) {
-        this.localizationModelHandler = localizationModelHandler;
+    private boolean inizialized=false;
+
+    public Text infoBar;
+
+    private LocalizationServiceHandler localizationServiceHandler;
+    public void initializeExplicit(LocalizationServiceHandler localizationServiceHandler) {
+        this.localizationServiceHandler = localizationServiceHandler;
+        this.inizialized=true;
     }
 
-    public void changeTurnToPlayerOne(Text turnBar) {
-        turnBar.setText(this.localizationModelHandler.localize("ui.user.message.turn.player.one"));
+    public void changeTurnToPlayerOne() {
+        infoBar.setText(this.localizationServiceHandler.localize("ui.user.message.turn.player.one"));
     }
-    public void changeTurnToPlayerTwo(Text turnBar) {
-        turnBar.setText(this.localizationModelHandler.localize("ui.user.message.turn.player.two"));
-    }
-
-    public void changeColorFirstPlayerSuccess(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.color.player.one.success"));
+    public void changeTurnToPlayerTwo() {
+        infoBar.setText(this.localizationServiceHandler.localize("ui.user.message.turn.player.two"));
     }
 
-    public void changeColorFirstPlayerFail(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.color.player.one.fail"));
+    public void changeColorFirstPlayerSuccess() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.color.player.one.success"));
     }
 
-    public void changeSymbolFirstPlayerSuccess(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.symbol.player.one.success"));
+    public void changeColorFirstPlayerFail() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.color.player.one.fail"));
     }
 
-    public void changeSymbolFirstPlayerFail(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.symbol.player.one.fail"));
+    public void changeSymbolFirstPlayerSuccess() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.symbol.player.one.success"));
     }
 
-    public void changeColorSecondPlayerSuccess(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.color.player.two.success"));
+    public void changeSymbolFirstPlayerFail() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.symbol.player.one.fail"));
     }
 
-    public void changeColorSecondPlayerFail(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.color.player.two.fail"));
+    public void changeColorSecondPlayerSuccess() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.color.player.two.success"));
     }
 
-    public void changeSymbolSecondPlayerSuccess(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.symbol.player.two.success"));
+    public void changeColorSecondPlayerFail() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.color.player.two.fail"));
     }
 
-    public void changeSymbolSecondPlayerFail(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.symbol.player.two.fail"));
+    public void changeSymbolSecondPlayerSuccess() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.symbol.player.two.success"));
     }
 
-    public void changePathSuccess(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.path.success"));
+    public void changeSymbolSecondPlayerFail() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.symbol.player.two.fail"));
     }
 
-    public void changePathFail(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.path.fail"));
+    public void changePathSuccess() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.path.success"));
     }
 
-    public void changeLanguage(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.language"));
+    public void changePathFail() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.path.fail"));
     }
 
-    public void loadMatch(Text infoBar) {
-        infoBar.setText(this.localizationModelHandler.localize("message.changed.game"));
+    public void changeLanguage() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.language"));
+    }
+
+    public void loadMatch() {
+        infoBar.setText(this.localizationServiceHandler.localize("message.changed.game"));
+    }
+
+    public void endGameDraw(){
+        infoBar.setText(this.localizationServiceHandler.localize("message.endgame.draw.title"));
+    }
+
+    public void endGameWin(int end){
+        if (end == 1){
+            infoBar.setText(this.localizationServiceHandler.localize("message.endgame.win.player.one.title"));
+        } else {
+            infoBar.setText(this.localizationServiceHandler.localize("message.endgame.win.player.two.title"));
+        }
+
     }
 }

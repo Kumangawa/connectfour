@@ -1,5 +1,4 @@
-package ch.supsi.connectfour.backend.controller.handler;
-import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
+package ch.supsi.connectfour.backend.controller;
 import ch.supsi.connectfour.backend.utility.Handler;
 
 import java.util.Locale;

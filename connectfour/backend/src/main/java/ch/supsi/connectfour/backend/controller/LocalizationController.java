@@ -1,7 +1,7 @@
 package ch.supsi.connectfour.backend.controller;
 
-import ch.supsi.connectfour.backend.controller.handler.LocalizationControllerHandler;
-import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
+import ch.supsi.connectfour.backend.model.LocalizationModelHandler;
+import ch.supsi.connectfour.backend.service.LocalizationServiceHandler;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -25,7 +25,6 @@ public class LocalizationController implements LocalizationControllerHandler {
         if (localizationHandler.isInitialized()) {
             return localizationHandler.getBundleName();
         }
-        // should handle exception
 
         return null;
     }
@@ -35,7 +34,6 @@ public class LocalizationController implements LocalizationControllerHandler {
         if (localizationHandler.isInitialized()) {
             return localizationHandler.getLocale();
         }
-        // should handle exception
 
         return null;
     }
@@ -45,7 +43,6 @@ public class LocalizationController implements LocalizationControllerHandler {
         if (localizationHandler.isInitialized()) {
             return localizationHandler.getResourceBundle();
         }
-        // should handle exception
 
         return null;
     }
@@ -53,7 +50,6 @@ public class LocalizationController implements LocalizationControllerHandler {
     @Override
     public String localize(String key) {
         if (key == null || key.isEmpty()) {
-            // should handle exception
             return "";
         }
 

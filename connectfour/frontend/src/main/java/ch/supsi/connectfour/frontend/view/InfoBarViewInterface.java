@@ -1,6 +1,6 @@
-package ch.supsi.connectfour.frontend.controller.observer;
+package ch.supsi.connectfour.frontend.view;
 
-public interface WriteObserver {
+public interface InfoBarViewInterface {
 
     public void changeTurnToPlayerOne();
 
@@ -29,4 +29,8 @@ public interface WriteObserver {
     public void changeLanguage();
 
     public void loadMatch();
+
+    public void endGameDraw();
+
+    public void endGameWin(int end);
 }

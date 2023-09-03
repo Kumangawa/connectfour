@@ -1,6 +1,6 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
+import ch.supsi.connectfour.backend.service.LocalizationServiceHandler;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class PreferenceView implements WritePreferenceView{
-    private LocalizationModelHandler localizationModelHandler;
+public class PreferenceView implements PreferenceViewInterface {
+    private LocalizationServiceHandler localizationServiceHandler;
     private Stage stage;
 
     //constructor
-    public PreferenceView(LocalizationModelHandler localizationModelHandler, Stage stage) {
-        this.localizationModelHandler = localizationModelHandler;
+    public PreferenceView(LocalizationServiceHandler localizationServiceHandler, Stage stage) {
+        this.localizationServiceHandler = localizationServiceHandler;
         this.stage = stage;
     }
 
@@ -55,9 +55,9 @@ public class PreferenceView implements WritePreferenceView{
         }
 
         ChoiceDialog<String> dialog = new ChoiceDialog<>(symbolPlayerSecond, symbols);
-        dialog.setTitle(this.localizationModelHandler.localize("message.editsymbol.title"));
+        dialog.setTitle(this.localizationServiceHandler.localize("message.editsymbol.title"));
         dialog.setHeaderText(null);
-        dialog.setContentText(this.localizationModelHandler.localize("message.editsymbol.player.two.text"));
+        dialog.setContentText(this.localizationServiceHandler.localize("message.editsymbol.player.two.text"));
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
@@ -84,9 +84,9 @@ public class PreferenceView implements WritePreferenceView{
         }
 
         ChoiceDialog<String> dialog = new ChoiceDialog<>(symbolPlayerFirst, symbols);
-        dialog.setTitle(this.localizationModelHandler.localize("message.editsymbol.title"));
+        dialog.setTitle(this.localizationServiceHandler.localize("message.editsymbol.title"));
         dialog.setHeaderText(null);
-        dialog.setContentText(this.localizationModelHandler.localize("message.editsymbol.player.one.text"));
+        dialog.setContentText(this.localizationServiceHandler.localize("message.editsymbol.player.one.text"));
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
@@ -115,13 +115,13 @@ public class PreferenceView implements WritePreferenceView{
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.initOwner(this.stage);
-        alert.setTitle(this.localizationModelHandler.localize("ui.menu.edit.preferences.colors"));
+        alert.setTitle(this.localizationServiceHandler.localize("ui.menu.edit.preferences.colors"));
         alert.setHeaderText(null);
         alert.getDialogPane().setContent(content);
 
         // Creazione dei bottoni di conferma e annulla
-        ButtonType confirmButton = new ButtonType(this.localizationModelHandler.localize("message.quit.confirm"), ButtonBar.ButtonData.OK_DONE);
-        ButtonType cancelButton = new ButtonType(this.localizationModelHandler.localize("message.quit.cancel"), ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType confirmButton = new ButtonType(this.localizationServiceHandler.localize("message.quit.confirm"), ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButton = new ButtonType(this.localizationServiceHandler.localize("message.quit.cancel"), ButtonBar.ButtonData.CANCEL_CLOSE);
 
         alert.getButtonTypes().setAll(confirmButton, cancelButton);
 

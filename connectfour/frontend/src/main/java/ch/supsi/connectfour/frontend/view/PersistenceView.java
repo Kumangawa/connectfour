@@ -1,6 +1,6 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.backend.model.handler.LocalizationModelHandler;
+import ch.supsi.connectfour.backend.service.LocalizationServiceHandler;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -9,14 +9,14 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class PersistenceView implements WritePersistenceView{
+public class PersistenceView implements PersistenceViewInterface {
     private Stage stage;
-    private LocalizationModelHandler localizationModelHandler;
+    private LocalizationServiceHandler localizationServiceHandler;
 
     //constructor
-    public PersistenceView(Stage stage, LocalizationModelHandler localizationModelHandler) {
+    public PersistenceView(Stage stage, LocalizationServiceHandler localizationServiceHandler) {
         this.stage = stage;
-        this.localizationModelHandler = localizationModelHandler;
+        this.localizationServiceHandler = localizationServiceHandler;
     }
 
     //static
@@ -52,12 +52,12 @@ public class PersistenceView implements WritePersistenceView{
     public void showPopUpQuit(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
-        alert.setTitle( this.localizationModelHandler.localize("message.quit.title"));
-        alert.setHeaderText( this.localizationModelHandler.localize("message.quit.text"));
+        alert.setTitle( this.localizationServiceHandler.localize("message.quit.title"));
+        alert.setHeaderText( this.localizationServiceHandler.localize("message.quit.text"));
 
         // Aggiungi i pulsanti per la conferma o la cancellazione
-        ButtonType confermaButton = new ButtonType( this.localizationModelHandler.localize("message.quit.confirm"));
-        ButtonType cancellaButton = new ButtonType( this.localizationModelHandler.localize("message.quit.cancel"));
+        ButtonType confermaButton = new ButtonType( this.localizationServiceHandler.localize("message.quit.confirm"));
+        ButtonType cancellaButton = new ButtonType( this.localizationServiceHandler.localize("message.quit.cancel"));
 
         alert.getButtonTypes().setAll(confermaButton, cancellaButton);
 
@@ -93,12 +93,12 @@ public class PersistenceView implements WritePersistenceView{
     public boolean showPopUpOpenGame(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
-        alert.setTitle( this.localizationModelHandler.localize("message.opengame.title"));
-        alert.setHeaderText( this.localizationModelHandler.localize("message.opengame.text"));
+        alert.setTitle( this.localizationServiceHandler.localize("message.opengame.title"));
+        alert.setHeaderText( this.localizationServiceHandler.localize("message.opengame.text"));
 
         // Aggiungi i pulsanti per la conferma o la cancellazione
-        ButtonType confermaButton = new ButtonType( this.localizationModelHandler.localize("message.quit.confirm"));
-        ButtonType cancellaButton = new ButtonType( this.localizationModelHandler.localize("message.quit.cancel"));
+        ButtonType confermaButton = new ButtonType( this.localizationServiceHandler.localize("message.quit.confirm"));
+        ButtonType cancellaButton = new ButtonType( this.localizationServiceHandler.localize("message.quit.cancel"));
 
         alert.getButtonTypes().setAll(confermaButton, cancellaButton);
 

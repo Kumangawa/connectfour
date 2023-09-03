@@ -1,10 +1,10 @@
 package ch.supsi.connectfour.frontend.model;
 
-import ch.supsi.connectfour.backend.utility.Match;
+import ch.supsi.connectfour.backend.model.Match;
 
 import java.io.*;
 
-public interface ReadAndWritePersistenceModel {
+public interface PersistenceModelInterface {
 
     public boolean isSaved();
     public void reset();

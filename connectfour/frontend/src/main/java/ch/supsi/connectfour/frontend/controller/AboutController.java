@@ -1,14 +1,14 @@
 package ch.supsi.connectfour.frontend.controller;
 
-import ch.supsi.connectfour.frontend.view.WriteAboutView;
+import ch.supsi.connectfour.frontend.view.AboutViewInterface;
 
-public class AboutController implements WriteAboutController{
+public class AboutController implements AboutControllerInterface {
     private boolean inizialized=false;
 
-    private WriteAboutView aboutView;
+    private AboutViewInterface aboutView;
 
     //constructor
-    public AboutController(WriteAboutView aboutView) {
+    public AboutController(AboutViewInterface aboutView) {
         this.aboutView = aboutView;
     }
 

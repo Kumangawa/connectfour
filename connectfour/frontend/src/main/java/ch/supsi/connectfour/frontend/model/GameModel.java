@@ -1,8 +1,10 @@
 package ch.supsi.connectfour.frontend.model;
 
+import ch.supsi.connectfour.backend.model.Match;
+import ch.supsi.connectfour.backend.model.MatchInterface;
 import ch.supsi.connectfour.backend.utility.*;
 
-public class GameModel implements ReadAndWriteGameModel{
+public class GameModel implements GameModelInterface {
     private Match match;
     //constructor
     public GameModel(){
@@ -27,7 +29,7 @@ public class GameModel implements ReadAndWriteGameModel{
         }
     }
 
-    public ReadMatch getReadMatch() { return match; }
+    public MatchInterface getReadMatch() { return match; }
 
     public void loadMatch(Match match) {
         this.match.copy(match);

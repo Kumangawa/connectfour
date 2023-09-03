@@ -1,8 +1,8 @@
 package ch.supsi.connectfour.frontend.model;
 
-import ch.supsi.connectfour.backend.utility.ReadPreference;
-import ch.supsi.connectfour.backend.utility.Match;
-import ch.supsi.connectfour.backend.utility.Preference;
+import ch.supsi.connectfour.backend.model.PreferenceInterface;
+import ch.supsi.connectfour.backend.model.Match;
+import ch.supsi.connectfour.backend.model.Preference;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,15 +14,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.DosFileAttributeView;
 
-public class PersistenceModel implements ReadAndWritePersistenceModel{
+public class PersistenceModel implements PersistenceModelInterface {
     public static final String pathGameSaved=Paths.get(Preference.defaultPath) +File.separator +"GameSaved";
     private boolean saved=false;
     private String savedPath;
-    private ReadPreference preference;
+    private PreferenceInterface preference;
     private ObjectMapper objectMapper;
+    private final String extension = ".json";
 
     //constructor
-    public PersistenceModel(ReadPreference preference) {
+    public PersistenceModel(PreferenceInterface preference) {
         this.preference = preference;
         this.objectMapper = new ObjectMapper();
     }
@@ -39,7 +40,7 @@ public class PersistenceModel implements ReadAndWritePersistenceModel{
 
     //private
     private String checkJsonExtension(String string){
-        return string.endsWith(".json") ? string: string+".json";
+        return string.endsWith(extension) ? string: string+extension;
     }
 
     //public
@@ -61,7 +62,7 @@ public class PersistenceModel implements ReadAndWritePersistenceModel{
 
         String serializedPath = savedPath;
         if (serializedPath == null) {
-            serializedPath = pathGameSaved + File.separator + System.currentTimeMillis() + ".json";
+            serializedPath = pathGameSaved + File.separator + System.currentTimeMillis() + extension;
         }
 
         try {

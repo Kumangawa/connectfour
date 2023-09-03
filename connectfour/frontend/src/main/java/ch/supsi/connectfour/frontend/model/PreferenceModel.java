@@ -1,7 +1,7 @@
 package ch.supsi.connectfour.frontend.model;
 
-import ch.supsi.connectfour.backend.utility.Preference;
-import ch.supsi.connectfour.backend.utility.ReadPreference;
+import ch.supsi.connectfour.backend.model.Preference;
+import ch.supsi.connectfour.backend.model.PreferenceInterface;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
@@ -9,10 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class PreferenceModel implements ReadAndWritePreferenceModel{
+public class PreferenceModel implements PreferenceModelInterface {
     private boolean initialized =false;
-    private Preference preference;
-    private Preference preferenceToSave;
+    private PreferenceInterface preferenceToSave;
     private ObjectMapper objectMapper;
     //constructor
     public PreferenceModel() {
@@ -20,11 +19,10 @@ public class PreferenceModel implements ReadAndWritePreferenceModel{
     }
     public PreferenceModel(Preference preference) {
         this.preferenceToSave =new Preference(preference);
-        this.preference=new Preference(preference);
         this.objectMapper = new ObjectMapper();
     }
     //static
-    private synchronized static void createFolderTicTacToeANDGameSaved(){
+    private synchronized static void createFolderConnectFourANDGameSaved(){
         try {
             Path defaultPath = Paths.get(Preference.defaultPath);
             Files.createDirectories(defaultPath);
@@ -39,22 +37,26 @@ public class PreferenceModel implements ReadAndWritePreferenceModel{
                 defaultPathFile.setExecutable(true);
             }
         } catch (IOException e) {
-            System.out.println("createFolderTicTacToeANDGameSaved: " + e.getMessage());
+            System.out.println("createFolderConnectFourANDGameSaved: " + e.getMessage());
         }
     }
 
     //private
     private void savePreference(){
-        createFolderTicTacToeANDGameSaved();
-        String jsonString = "";
+        createFolderConnectFourANDGameSaved();
+        String combinedJson = "";
         try {
-            jsonString = objectMapper.writeValueAsString(this.preferenceToSave);
+            // Aggiungi l'array "player" direttamente all'oggetto "preference"
+            this.preferenceToSave.setPlayer(this.preferenceToSave.getPlayer());
+
+            // Serializza l'intero oggetto "preference"
+            combinedJson = objectMapper.writeValueAsString(this.preferenceToSave);
         } catch (IOException e) {
             System.out.println("savePreference: JsonProcessingException " + e.getMessage());
         }
         String serializedPath = Preference.defaultPath + "/Preference.json";
         try {
-            Files.write(Path.of(serializedPath), jsonString.getBytes());
+            Files.write(Path.of(serializedPath), combinedJson.getBytes());
         } catch (IOException e) {
             System.out.println("savePreference: IOException " + e.getMessage());
         }
@@ -68,20 +70,19 @@ public class PreferenceModel implements ReadAndWritePreferenceModel{
         if (preferenceFile.exists()) {
             try {
                 byte[] jsonData = Files.readAllBytes(preferenceFile.toPath());
-                this.preference = objectMapper.readValue(jsonData, Preference.class);
-                this.preferenceToSave = new Preference(preference);
+                this.preferenceToSave = objectMapper.readValue(jsonData, Preference.class);
+
+                this.preferenceToSave.switchSymbol();
             } catch (IOException e) {
                 System.out.println("initializeExplicit: IOException " + e.getMessage());
-                this.preference = new Preference();
                 this.preferenceToSave = new Preference();
             }
         } else {
-            this.preference = new Preference();
             this.preferenceToSave = new Preference();
             savePreference();
         }
 
-        if (this.preference.getPreferedPath() == null) {
+        if (this.preferenceToSave.getPreferedPath() == null) {
             this.changePreferedPath(Preference.defaultPath);
         }
         this.initialized = true;
@@ -89,35 +90,30 @@ public class PreferenceModel implements ReadAndWritePreferenceModel{
     public boolean isInitialized() {
         return initialized;
     }
-
     public void changePreferedPath(String preferedPath){
-        this.preference.setPathChanged(true);
-        this.preference.setPreferedPath(preferedPath);
+        this.preferenceToSave.setPathChanged(true);
         this.preferenceToSave.setPreferedPath(preferedPath);
         this.savePreference();
     }
     public void setSimbolPlayerFirst(String simbolPlayer) {
-        this.preferenceToSave.setSimbolPlayerFirst(simbolPlayer);
+        this.preferenceToSave.setNextSymbolPlayer(0,simbolPlayer);
         this.savePreference();
     }
     public void setSimbolPlayerSecond(String simbolPlayer) {
-        this.preferenceToSave.setSimbolPlayerSecond(simbolPlayer);
+        this.preferenceToSave.setNextSymbolPlayer(1,simbolPlayer);
         this.savePreference();
     }
-
     public void setColorPlayerFirst(String colorPlayer) {
-        this.preferenceToSave.setColorPlayerFirst(colorPlayer);
+        this.preferenceToSave.setNextColorPlayer(0,colorPlayer);
         this.savePreference();
     }
     public void setColorPlayerSecond(String colorPlayer) {
-        this.preferenceToSave.setColorPlayerSecond(colorPlayer);
+        this.preferenceToSave.setNextColorPlayer(1,colorPlayer);
         this.savePreference();
     }
     public void setLanguage(String language) {
         this.preferenceToSave.setLanguage(language);
         this.savePreference();
     }
-    public ReadPreference getReadPreference(){return preference;}
-    public ReadPreference getReadPreferenceToSave(){return preferenceToSave;}
-
+    public PreferenceInterface getReadPreferenceToSave(){return preferenceToSave;}
 }
