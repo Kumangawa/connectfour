@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<GridPane fx:controller="ch.supsi.connectfour.frontend.controller.GameController" xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="20" vgap="20"> <!-- 10 -->
+    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+
+    <Button fx:id="b00" GridPane.columnIndex="0" GridPane.rowIndex="0" prefHeight="65" prefWidth="65" onAction="#playerMove">        <!-- 100 -->
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b10" GridPane.columnIndex="0" GridPane.rowIndex="1" prefHeight="65" prefWidth="65"  onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b20" GridPane.columnIndex="0" GridPane.rowIndex="2" prefHeight="65" prefWidth="65"  onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b30" GridPane.columnIndex="0" GridPane.rowIndex="3" prefHeight="65" prefWidth="65"  onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b40" GridPane.columnIndex="0" GridPane.rowIndex="4" prefHeight="65" prefWidth="65"  onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b50" GridPane.columnIndex="0" GridPane.rowIndex="5" prefHeight="65" prefWidth="65"  onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b01" GridPane.columnIndex="1" GridPane.rowIndex="0" prefHeight="65" prefWidth="65"  onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b11" GridPane.columnIndex="1" GridPane.rowIndex="1" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b21" GridPane.columnIndex="1" GridPane.rowIndex="2" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b31" GridPane.columnIndex="1" GridPane.rowIndex="3" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b41" GridPane.columnIndex="1" GridPane.rowIndex="4" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b51" GridPane.columnIndex="1" GridPane.rowIndex="5" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b02" GridPane.columnIndex="2" GridPane.rowIndex="0" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b12" GridPane.columnIndex="2" GridPane.rowIndex="1" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b22" GridPane.columnIndex="2" GridPane.rowIndex="2" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b32" GridPane.columnIndex="2" GridPane.rowIndex="3" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b42" GridPane.columnIndex="2" GridPane.rowIndex="4" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b52" GridPane.columnIndex="2" GridPane.rowIndex="5" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b03" GridPane.columnIndex="3" GridPane.rowIndex="0" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b13" GridPane.columnIndex="3" GridPane.rowIndex="1" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b23" GridPane.columnIndex="3" GridPane.rowIndex="2" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b33" GridPane.columnIndex="3" GridPane.rowIndex="3" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b43" GridPane.columnIndex="3" GridPane.rowIndex="4" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b53" GridPane.columnIndex="3" GridPane.rowIndex="5" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b04" GridPane.columnIndex="4" GridPane.rowIndex="0" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b14" GridPane.columnIndex="4" GridPane.rowIndex="1" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b24" GridPane.columnIndex="4" GridPane.rowIndex="2" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b34" GridPane.columnIndex="4" GridPane.rowIndex="3" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b44" GridPane.columnIndex="4" GridPane.rowIndex="4" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b54" GridPane.columnIndex="4" GridPane.rowIndex="5" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b05" GridPane.columnIndex="5" GridPane.rowIndex="0" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b15" GridPane.columnIndex="5" GridPane.rowIndex="1" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b25" GridPane.columnIndex="5" GridPane.rowIndex="2" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b35" GridPane.columnIndex="5" GridPane.rowIndex="3" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b45" GridPane.columnIndex="5" GridPane.rowIndex="4" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b55" GridPane.columnIndex="5" GridPane.rowIndex="5" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b06" GridPane.columnIndex="6" GridPane.rowIndex="0" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b16" GridPane.columnIndex="6" GridPane.rowIndex="1" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b26" GridPane.columnIndex="6" GridPane.rowIndex="2" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b36" GridPane.columnIndex="6" GridPane.rowIndex="3" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b46" GridPane.columnIndex="6" GridPane.rowIndex="4" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b56" GridPane.columnIndex="6" GridPane.rowIndex="5" prefHeight="65" prefWidth="65" onAction="#playerMove">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="30.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b60" GridPane.columnIndex="0" GridPane.rowIndex="6" prefHeight="65" prefWidth="65" onAction="#playerMove" text="%ui.button.press">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="10.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b61" GridPane.columnIndex="1" GridPane.rowIndex="6" prefHeight="65" prefWidth="65" onAction="#playerMove" text="%ui.button.press">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="10.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b62" GridPane.columnIndex="2" GridPane.rowIndex="6" prefHeight="65" prefWidth="65" onAction="#playerMove" text="%ui.button.press">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="10.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b63" GridPane.columnIndex="3" GridPane.rowIndex="6" prefHeight="65" prefWidth="65" onAction="#playerMove" text="%ui.button.press">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="10.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b64" GridPane.columnIndex="4" GridPane.rowIndex="6" prefHeight="65" prefWidth="65" onAction="#playerMove" text="%ui.button.press">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="10.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b65" GridPane.columnIndex="5" GridPane.rowIndex="6" prefHeight="65" prefWidth="65" onAction="#playerMove" text="%ui.button.press">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="10.0"/>
+        </font>
+    </Button>
+
+    <Button fx:id="b66" GridPane.columnIndex="6" GridPane.rowIndex="6" prefHeight="65" prefWidth="65" onAction="#playerMove" text="%ui.button.press">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <font>
+            <Font name="Comic Sans MS" size="10.0"/>
+        </font>
+    </Button>
+
+</GridPane>
